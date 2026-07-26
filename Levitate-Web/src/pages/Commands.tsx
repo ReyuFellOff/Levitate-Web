@@ -13,6 +13,9 @@ type CommandEntry = {
 };
 
 const byName = (a: CommandEntry, b: CommandEntry) => a.name.localeCompare(b.name);
+const baseCommandName = (name: string) => name.trim().split(/\s+/)[0].toLowerCase();
+const uniqueCommandCount = (commands: CommandEntry[]) =>
+  new Set(commands.map((command) => baseCommandName(command.name))).size;
 
 export default function Commands() {
   const categories = site.commandCategories as unknown as Array<{
@@ -71,7 +74,7 @@ export default function Commands() {
       .sort(byName);
   }, [query, categories]);
 
-  const totalCommands = categories.reduce((sum, c) => sum + c.commands.length, 0);
+  const totalCommands = uniqueCommandCount(categories.flatMap((c) => c.commands));
 
   return (
     <section className="container max-w-5xl pt-4 pb-24">
@@ -152,7 +155,7 @@ export default function Commands() {
                     isActive ? 'bg-white/20 text-white' : 'bg-muted text-muted-foreground'
                   }`}
                 >
-                  {c.commands.length}
+                  {uniqueCommandCount(c.commands)}
                 </span>
               </button>
             );
