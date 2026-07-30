@@ -1,7 +1,7 @@
 import {
   Shield, Zap, Sparkles, Bell, Layers,
   MessageSquare, Cake, Star, Swords,
-  Users, Volume2, Heart, Trash2, Server,
+  Users, Volume2, Heart, Trash2,
   Music2,
 } from 'lucide-react';
 import { botConfig } from './bot';
@@ -50,7 +50,7 @@ export const site = {
     {
       icon:        Sparkles,
       title:       'Fun Commands',
-      description: 'Ship compatibility, rating commands (gay, cute, rizz, simp, IQ), wanted posters, who-would-win, tic-tac-toe, rock-paper-scissors PvP, DuckDuckGo image search, and more.',
+      description: 'Ship compatibility, rating commands (howgay, howcute, howrizz, howsimp, howintelligent, howautistic), wanted posters, who-would-win, tic-tac-toe, rock-paper-scissors PvP, DuckDuckGo image search, and more.',
     },
     {
       icon:        Users,
@@ -146,7 +146,6 @@ export const site = {
       commands: [
         { name: '$afk',              aliases: [],                                    permission: null,             description: 'Set AFK (server or global). Auto-removed on your next message.',  usage: '$afk [reason]' },
         { name: '$sticky',           aliases: [],                                    permission: 'Manage Server',  description: 'Manage sticky messages — re-post at the bottom on every new message.', usage: '$sticky set text <content>\n$sticky enable\n$sticky disable\n$sticky view' },
-        { name: '$autorole',         aliases: ['ar', 'autoroles'],                   permission: 'Manage Roles',   description: 'Configure roles given automatically to new members or bots.',     usage: '$autorole member add @role\n$autorole bot add @role\n$autorole member|bot remove @role\n$autorole list\n$autorole clear' },
         { name: '$vanityrole',       aliases: ['vr', 'vanityroles'],                 permission: 'Manage Server',  description: 'Auto-assign roles based on a status/bio keyword or the server tag.', usage: '$vanityrole\n$vanityrole status\n$vanityrole bio\n$vanityrole tag' },
         { name: '$alias',            aliases: [],                                    permission: null,             description: 'Create a personal private shortcut for any command.',             usage: '$alias create <name> <command>\n$alias list\n$alias delete <name>' },
         { name: '$list',             aliases: ['ls'],                                permission: null,             description: 'Paginated list of roles, members, bots, emojis, stickers, channels, or bans.', usage: '$list roles|members|bots|emojis|channels|bans' },
@@ -159,12 +158,6 @@ export const site = {
         { name: '$host-image',       aliases: ['hostimage', 'imgbb', 'upload-image'],permission: null,             description: 'Upload an image (attachment or URL) and get back hosted links.',    usage: '$host-image <attachment>\n$host-image <image URL>' },
         { name: '$placeholder-help', aliases: ['placeholders', 'ph', 'phhelp'],      permission: null,             description: 'Paginated reference for all available placeholder tokens.',     usage: '$placeholder-help' },
         { name: '$mynop',            aliases: ['mynoprefix'],                         permission: null,             description: 'Toggle your own noprefix access on or off. Only works if a developer has granted you noprefix access.', usage: '$mynop\n$mynop on\n$mynop off' },
-      ],
-    },
-    {
-      name: 'Server',
-      icon: Server,
-      commands: [
         { name: '$serverinfo',  aliases: ['si', 'guildinfo', 'guild'],   permission: null,             description: '5-tab panel: Overview · Members · Channels · Security · Assets.', usage: '$serverinfo' },
         { name: '$membercount', aliases: ['memcount', 'mc'],             permission: null,             description: 'Show total, user, and bot member counts.',                         usage: '$membercount' },
         { name: '$userinfo',    aliases: ['ui', 'whois'],                permission: null,             description: '4-tab panel: About · Roles · Permissions · Assets. Buttons active 3 min.', usage: '$userinfo [@user]' },
@@ -251,6 +244,7 @@ export const site = {
         { name: '$embed',     aliases: ['embedbuilder', 'eb'],              permission: null,              description: 'Interactive classic-embed builder with live preview, fields, and link buttons.', usage: '$embed' },
         { name: '$container', aliases: ['cb', 'containerbuilder', 'build'], permission: null,              description: 'Interactive CV2 message builder — text, info card, photo grid, quick links.', usage: '$container' },
         { name: '$webhook',   aliases: ['webhooks', 'wh'],                  permission: 'Manage Webhooks', description: 'Interactive webhook manager — create, send, rename, move, delete.', usage: '$webhook' },
+        { name: '$autorole',  aliases: ['ar', 'autoroles'],                permission: 'Manage Roles',   description: 'Configure roles given automatically to new members or bots.',     usage: '$autorole member add @role\n$autorole bot add @role\n$autorole member|bot remove @role\n$autorole list\n$autorole clear' },
       ],
     },
     {
@@ -280,12 +274,12 @@ export const site = {
       icon: Sparkles,
       commands: [
         { name: '$ship',           aliases: [],                                 permission: null, description: 'Generate a compatibility image for two users.',                  usage: '$ship <@user1> <@user2>' },
-        { name: '$gay',            aliases: ['howgay'],                         permission: null, description: 'See how gay someone is — returns a percentage rating.',          usage: '$gay [@user]' },
-        { name: '$simp',           aliases: [],                                 permission: null, description: 'See how much of a simp someone is.',                             usage: '$simp [@user]' },
-        { name: '$howcute',        aliases: ['cute'],                           permission: null, description: 'Rate how cute someone is.',                                      usage: '$howcute [@user]' },
-        { name: '$autistic',       aliases: ['howautistic'],                    permission: null, description: 'Rate someone\'s autism level.',                                  usage: '$autistic [@user]' },
-        { name: '$intelligent',    aliases: ['iq', 'howsmart', 'intelligence'], permission: null, description: 'Rate someone\'s IQ / intelligence.',                            usage: '$intelligent [@user]' },
-        { name: '$rizz',           aliases: [],                                 permission: null, description: 'See how much rizz someone has.',                                 usage: '$rizz [@user]' },
+        { name: '$howgay',         aliases: ['gay'],                                        permission: null, description: 'See how gay someone is — returns a percentage rating.',  usage: '$howgay [@user]' },
+        { name: '$howsimp',        aliases: ['simp'],                                       permission: null, description: 'See how much of a simp someone is.',                 usage: '$howsimp [@user]' },
+        { name: '$howcute',        aliases: ['cute'],                                       permission: null, description: 'Rate how cute someone is.',                           usage: '$howcute [@user]' },
+        { name: '$howautistic',    aliases: ['autistic'],                                   permission: null, description: 'Rate someone\'s autism level.',                       usage: '$howautistic [@user]' },
+        { name: '$howintelligent', aliases: ['intelligent', 'iq', 'howsmart', 'intelligence'], permission: null, description: 'Rate someone\'s IQ / intelligence.',           usage: '$howintelligent [@user]' },
+        { name: '$howrizz',        aliases: ['rizz'],                                       permission: null, description: 'See how much rizz someone has.',                      usage: '$howrizz [@user]' },
         { name: '$wanted',         aliases: [],                                 permission: null, description: 'Generate a Wild West wanted poster for a user.',                 usage: '$wanted [@user]' },
         { name: '$whowouldwin',    aliases: ['wwn'],                            permission: null, description: 'See who would win in a battle between two users.',               usage: '$whowouldwin <@user1> <@user2>' },
         { name: '$tictactoe',      aliases: ['ttt'],                            permission: null, description: 'Play tic tac toe against another member or the bot.',            usage: '$tictactoe [@user]' },
