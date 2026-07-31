@@ -28,7 +28,7 @@ export default function Commands() {
   const [query,  setQuery]  = useState(searchParams.get('q') ?? '');
   const [active, setActive] = useState(categories[0].name);
 
-  useEffect(() => { document.title = `Commands — Levitate`; }, []);
+  useEffect(() => { document.title = `Commands | Levitate`; }, []);
 
   // Pick up ?q= from the navbar search (or any deep link) whenever it changes.
   useEffect(() => {
@@ -100,7 +100,7 @@ export default function Commands() {
         <p className="mt-4 text-muted-foreground">
           Browse every command by category. Default prefix is{' '}
           <code className="font-mono text-primary bg-primary/10 px-1.5 py-0.5 rounded-md text-sm">$</code>
-          {' '}— most commands also have a slash variant.
+          . Most commands also have a slash variant.
         </p>
       </motion.div>
 
@@ -296,9 +296,9 @@ export default function Commands() {
         className="mt-16 liquid-glass rounded-2xl px-6 py-5 flex flex-wrap gap-6 text-sm text-muted-foreground"
       >
         <span className="font-display font-semibold text-foreground">Legend</span>
-        <span><code className="font-mono text-primary">&lt;required&gt;</code> — must be provided</span>
-        <span><code className="font-mono text-muted-foreground">[optional]</code> — can be omitted</span>
-        <span><code className="font-mono text-muted-foreground">a|b</code> — pick one</span>
+        <span><code className="font-mono text-primary">&lt;required&gt;</code>: must be provided</span>
+        <span><code className="font-mono text-muted-foreground">[optional]</code>: can be omitted</span>
+        <span><code className="font-mono text-muted-foreground">a|b</code>: pick one</span>
         <span>Slash commands use <code className="font-mono text-primary">/</code> instead of <code className="font-mono text-primary">$</code></span>
       </motion.div>
     </section>

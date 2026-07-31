@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from '@/context/ThemeContext';
 import Layout from '@/components/Layout';
 import Home from '@/pages/Home';
 import Commands from '@/pages/Commands';
@@ -9,6 +10,7 @@ import TermsOfService from '@/pages/TermsOfService';
 
 export default function App() {
   return (
+    <ThemeProvider>
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
@@ -21,5 +23,6 @@ export default function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    </ThemeProvider>
   );
 }

@@ -19,11 +19,11 @@ export const legalConfig = {
         heading: '1. Information We Collect',
         intro:   'Levitate is a Discord bot, and the information it processes comes almost entirely from Discord\'s own platform and the servers you add it to. We collect and store only what is needed to provide the features you and your server enable.',
         clauses: [
-          'Discord identifiers: user IDs, server (guild) IDs, channel IDs, and role IDs — used to associate settings and data with the correct account or server.',
+          'Discord identifiers: user IDs, server (guild) IDs, channel IDs, and role IDs, used to associate settings and data with the correct account or server.',
           'Server configuration: prefixes, log channel settings, autorole rules, sticky messages, autoresponder triggers, welcomer and birthday configuration, antinuke module settings, and similar settings you configure with commands.',
           'User-submitted content: warnings issued by moderators, saved message/embed/CV2 payloads created with data commands, birthdays you set, aliases you create, and AFK statuses/messages.',
           'Moderation records: bans, kicks, timeouts, and warnings carried out through the Bot, including the reason text provided by the moderator.',
-          'Command usage metadata: which commands are run, in which server, and when — used for rate-limiting, debugging, and abuse prevention. We do not log full command arguments beyond what is needed to operate the feature.',
+          'Command usage metadata: which commands are run, in which server, and when. Used for rate-limiting, debugging, and abuse prevention. We do not log full command arguments beyond what is needed to operate the feature.',
           'Message content: only processed transiently for features that require it (e.g. autoresponders, sticky messages, snipe/reaction-snipe, purge filters). Message content is not permanently stored unless a server explicitly enables message logging with `$log message`, and even then only metadata and, where necessary, the message content relevant to the logged event is kept.',
           'Website usage: the landing page itself does not use tracking cookies or third-party analytics. Standard web server logs (IP address, user agent, request timestamp) may be retained briefly by our hosting provider for security and abuse prevention.',
         ],
@@ -33,7 +33,7 @@ export const legalConfig = {
         clauses: [
           'To operate and provide the features you and your server administrators enable (moderation, logging, welcomer, birthdays, antinuke, utility commands, etc.).',
           'To enforce per-server and per-user configuration such as custom prefixes, self-prefixes, and namestyles.',
-          'To detect, investigate, and respond to abuse, exploitation, or violations of these policies — including antinuke enforcement actions.',
+          'To detect, investigate, and respond to abuse, exploitation, or violations of these policies, including antinuke enforcement actions.',
           'To maintain, debug, and improve the Bot\'s reliability and performance.',
           'To respond to support requests made in our support server.',
         ],
@@ -53,7 +53,7 @@ export const legalConfig = {
         intro:   'We do not share your data with third parties for advertising or marketing purposes. Limited sharing occurs only in the following circumstances:',
         clauses: [
           'With Discord Inc., as an inherent part of operating a Discord bot on their platform, subject to Discord\'s own Privacy Policy and Terms of Service.',
-          'With infrastructure and hosting providers strictly to store data and run the Bot (e.g. database hosting, process hosting) — these providers do not have independent rights to use your data.',
+          'With infrastructure and hosting providers strictly to store data and run the Bot (e.g. database hosting, process hosting). These providers do not have independent rights to use your data.',
           'When required by law, legal process, or to protect the rights, property, or safety of the Bot, its users, or the public.',
           'With your explicit consent, or at your direction (for example, when a server admin sends a saved data payload).',
         ],

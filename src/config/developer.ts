@@ -16,7 +16,7 @@ export const developerConfig = {
 
   /* ── Short bio — freely customisable ─────────────────────
      Shown directly under the developer's name on the About page. */
-  description: 'Designed, built, and maintains Levitate entirely solo — from architecture to every pixel of the UI.',
+  description: 'Designed, built, and maintains Levitate entirely solo, from architecture to every pixel of the UI.',
 
   /* ── Other bots by this developer (names only) ──────────── */
   bots: [

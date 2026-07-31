@@ -35,7 +35,7 @@ export default function TwinkleStars({ count = 40 }: { count?: number }) {
             height: s.size,
             animationDelay: `${s.delay}s`,
             animationDuration: `${s.duration}s`,
-            boxShadow: '0 0 6px 1px hsl(265 88% 80% / 0.8)',
+            boxShadow: '0 0 6px 1px hsl(227 95% 80% / 0.8)',
           }}
         />
       ))}

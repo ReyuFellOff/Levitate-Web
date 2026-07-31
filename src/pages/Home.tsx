@@ -25,7 +25,7 @@ function FloatingSticker({
       src={src}
       alt={alt}
       draggable={false}
-      className={`pointer-events-none select-none drop-shadow-[0_8px_24px_hsl(265_88%_76%/0.45)] ${className ?? ''}`}
+      className={`pointer-events-none select-none drop-shadow-[0_8px_24px_hsl(227_95%_71%/0.45)] ${className ?? ''}`}
       style={{ width: size, height: size }}
       animate={{ y: [0, -14, 0], rotate: [-rotate, rotate, -rotate] }}
       transition={{ duration, delay, repeat: Infinity, ease: 'easeInOut' }}
@@ -119,7 +119,7 @@ function TiltCard({ children, className }: { children: React.ReactNode; classNam
         className="absolute inset-0 rounded-2xl pointer-events-none z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         style={{
           background: `radial-gradient(circle at ${shineX} ${shineY},
-            hsl(260 80% 96% / 0.13) 0%,
+            hsl(228 80% 96% / 0.13) 0%,
             transparent 58%)`,
         }}
       />
@@ -169,10 +169,6 @@ function Hero() {
             transition={{ delay: 0.2 }}
             className="inline-flex items-center gap-2 liquid-glass rounded-full px-4 py-1.5 text-xs font-medium"
           >
-            <span
-              className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse-glow"
-              style={{ boxShadow: '0 0 8px hsl(var(--primary) / 0.8)' }}
-            />
             ✨ Moderation · Antinuke · Utility
           </motion.div>
 
@@ -293,7 +289,7 @@ function Hero() {
                 {/* Inner shimmer */}
                 <motion.div
                   className="absolute inset-0"
-                  style={{ background: 'linear-gradient(135deg, hsl(260 80% 96% / 0.25) 0%, transparent 50%)' }}
+                  style={{ background: 'linear-gradient(135deg, hsl(228 80% 96% / 0.25) 0%, transparent 50%)' }}
                   animate={{ opacity: [0.4, 0.9, 0.4] }}
                   transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                 />
@@ -365,7 +361,7 @@ function Features() {
           Everything your server needs
         </h2>
         <p className="mt-4 text-muted-foreground max-w-md mx-auto text-sm">
-          Modules that work together seamlessly. Every command, every interaction — refined and Components V2.
+          Every command built tight. Every interaction refined and shipped as Components V2.
         </p>
       </motion.div>
 
@@ -565,7 +561,7 @@ function Cta() {
           viewport={{ once: true }}
           className="relative font-display font-extrabold text-4xl md:text-5xl text-white tracking-tight leading-tight"
         >
-          Ready to elevate<br className="hidden sm:block" /> your server?
+          Want Levitate on<br className="hidden sm:block" /> your server?
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
@@ -574,7 +570,7 @@ function Cta() {
           transition={{ delay: 0.15 }}
           className="relative mt-4 text-white/75 max-w-md mx-auto text-base"
         >
-          Add Levitate in seconds. No setup needed — protection and utility start working immediately.
+          Add Levitate in seconds. No setup needed. Protection and utility start working the moment you add it.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -587,7 +583,7 @@ function Cta() {
             href={site.bot.inviteUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 bg-white text-[hsl(262,70%,38%)] font-bold px-9 py-4 rounded-full shadow-lg hover:opacity-93 hover:scale-[1.04] transition-all duration-300 text-sm"
+            className="inline-flex items-center gap-2 bg-white text-[hsl(232,60%,28%)] font-bold px-9 py-4 rounded-full shadow-lg hover:opacity-93 hover:scale-[1.04] transition-all duration-300 text-sm"
           >
             Add to Discord <ExternalLink className="h-4 w-4" />
           </a>
@@ -609,7 +605,7 @@ function Cta() {
    Page
 ───────────────────────────────────────────────────────────────────────────── */
 export default function Home() {
-  useEffect(() => { document.title = `Levitate — ${site.bot.tagline}`; }, []);
+  useEffect(() => { document.title = `Levitate | ${site.bot.tagline}`; }, []);
   return (
     <>
       <Hero />

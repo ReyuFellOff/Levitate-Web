@@ -71,7 +71,7 @@ function Avatar({
 
 /* ─── Page ──────────────────────────────────────────────────────────────── */
 export default function About() {
-  useEffect(() => { document.title = `About — Levitate`; }, []);
+  useEffect(() => { document.title = `About | Levitate`; }, []);
 
   return (
     <section className="container max-w-3xl pt-8 pb-28">

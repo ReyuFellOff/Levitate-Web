@@ -25,7 +25,7 @@ export default function AnnouncementBadge() {
     <div className="fixed bottom-4 left-4 z-40 pointer-events-none hidden sm:block max-w-[calc(100vw-2rem)]">
       <div
         className="liquid-glass rounded-full pl-3 pr-4 py-2 flex items-center gap-2 shadow-[var(--shadow-glow)] max-w-[420px]"
-        style={{ boxShadow: '0 8px 30px hsl(262 70% 73% / 0.18), 0 0 0 1px hsl(var(--border) / 0.4)' }}
+        style={{ boxShadow: '0 8px 30px hsl(227 70% 68% / 0.18), 0 0 0 1px hsl(var(--border) / 0.4)' }}
       >
         <span
           className="h-6 w-6 rounded-full grid place-items-center flex-shrink-0 bg-aurora animate-aurora"

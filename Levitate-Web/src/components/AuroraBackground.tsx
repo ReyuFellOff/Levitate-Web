@@ -1,39 +1,46 @@
-export default function AuroraBackground() {
-  return (
-    <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none select-none">
-      {/* Lavender — top-left */}
-      <div
-        className="absolute -top-48 -left-48 h-[780px] w-[780px] rounded-full animate-blob"
-        style={{ background: 'hsl(265 88% 76%)', opacity: 0.22, filter: 'blur(120px)' }}
-      />
-      {/* Pink — top-right */}
-      <div
-        className="absolute -top-24 -right-48 h-[660px] w-[660px] rounded-full animate-blob"
-        style={{ background: 'hsl(326 82% 74%)', opacity: 0.2, filter: 'blur(115px)', animationDelay: '5s' }}
-      />
-      {/* Sky blue — bottom-left */}
-      <div
-        className="absolute bottom-0 -left-24 h-[580px] w-[580px] rounded-full animate-blob"
-        style={{ background: 'hsl(199 90% 70%)', opacity: 0.16, filter: 'blur(115px)', animationDelay: '9s' }}
-      />
-      {/* Magenta — center */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[460px] w-[560px] rounded-full animate-blob"
-        style={{ background: 'hsl(310 70% 72%)', opacity: 0.13, filter: 'blur(130px)', animationDelay: '14s' }}
-      />
-      {/* Bottom-right accent */}
-      <div
-        className="absolute -bottom-32 -right-32 h-[520px] w-[520px] rounded-full animate-blob"
-        style={{ background: 'hsl(265 88% 76%)', opacity: 0.17, filter: 'blur(105px)', animationDelay: '7s' }}
-      />
+import { motion } from 'framer-motion';
 
-      {/* Subtle dot grid */}
+/**
+ * Full-viewport ambient aurora blobs that drift slowly behind content.
+ * Blob colours use CSS custom properties so they update automatically
+ * when the active colour theme changes.
+ */
+export default function AuroraBackground() {
+  const blob = (varName: string) => `hsl(var(--${varName}))`;
+
+  return (
+    <div className="pointer-events-none fixed inset-0 overflow-hidden -z-10" aria-hidden>
+      <motion.div className="absolute -top-1/4 left-1/4 h-[70vh] w-[70vh] rounded-full"
+        style={{ background: blob('aurora-blob-1'), opacity: 0.22, filter: 'blur(120px)' }}
+        animate={{ x: [0, 40, 0], y: [0, 30, 0] }}
+        transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }} />
+
+      <motion.div className="absolute top-1/3 -right-1/4 h-[60vh] w-[60vh] rounded-full"
+        style={{ background: blob('aurora-blob-2'), opacity: 0.20, filter: 'blur(115px)' }}
+        animate={{ x: [0, -35, 0], y: [0, 40, 0] }}
+        transition={{ duration: 26, repeat: Infinity, ease: 'easeInOut', delay: 5 }} />
+
+      <motion.div className="absolute -bottom-1/4 left-1/3 h-[55vh] w-[55vh] rounded-full"
+        style={{ background: blob('aurora-blob-3'), opacity: 0.16, filter: 'blur(115px)' }}
+        animate={{ x: [0, 30, 0], y: [0, -25, 0] }}
+        transition={{ duration: 30, repeat: Infinity, ease: 'easeInOut', delay: 9 }} />
+
+      <motion.div className="absolute top-2/3 left-1/2 h-[40vh] w-[40vh] rounded-full"
+        style={{ background: blob('aurora-blob-4'), opacity: 0.13, filter: 'blur(130px)' }}
+        animate={{ x: [0, -20, 0], y: [0, 20, 0] }}
+        transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut', delay: 14 }} />
+
+      <motion.div className="absolute -top-1/3 right-1/3 h-[50vh] w-[50vh] rounded-full"
+        style={{ background: blob('aurora-blob-5'), opacity: 0.17, filter: 'blur(105px)' }}
+        animate={{ x: [0, 25, 0], y: [0, 35, 0] }}
+        transition={{ duration: 24, repeat: Infinity, ease: 'easeInOut', delay: 7 }} />
+
+      {/* Subtle dot-grid overlay */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 opacity-[0.025]"
         style={{
-          backgroundImage:
-            'radial-gradient(circle, hsl(265 70% 82% / 0.14) 1px, transparent 1px)',
-          backgroundSize: '40px 40px',
+          backgroundImage: 'radial-gradient(circle, hsl(var(--glass-shine) / 0.14) 1px, transparent 1px)',
+          backgroundSize:  '32px 32px',
         }}
       />
     </div>

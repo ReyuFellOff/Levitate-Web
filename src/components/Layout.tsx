@@ -32,7 +32,7 @@ function CursorGlow() {
         height:         700,
         translateX:     '-50%',
         translateY:     '-50%',
-        background:     'radial-gradient(circle, hsl(262 70% 73% / 0.065) 0%, transparent 65%)',
+        background:     'radial-gradient(circle, hsl(227 70% 68% / 0.065) 0%, transparent 65%)',
         pointerEvents:  'none',
         zIndex:         0,
         willChange:     'transform',

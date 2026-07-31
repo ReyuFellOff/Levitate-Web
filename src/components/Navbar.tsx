@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ExternalLink } from 'lucide-react';
 import { site } from '@/config/site';
 import NavSearch, { type NavSearchHandle } from './NavSearch';
+import ThemeSwitcher from './ThemeSwitcher';
 
 export default function Navbar() {
   const [open, setOpen]         = useState(false);
@@ -44,8 +45,9 @@ export default function Navbar() {
       <div className="container max-w-5xl">
         <nav
           className={`liquid-glass rounded-2xl px-5 py-3 flex items-center justify-between transition-all duration-500 ${
-            scrolled ? 'shadow-[0_8px_40px_hsl(262_70%_73%/0.12)]' : ''
+            scrolled ? 'shadow-[0_8px_40px_hsl(227_70%_68%/0.12)]' : ''
           }`}
+          style={{ overflow: 'visible' }}
         >
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 group" onClick={() => setOpen(false)}>
@@ -94,7 +96,7 @@ export default function Navbar() {
           {/* Search */}
           <NavSearch ref={searchRef} className="hidden lg:block w-48 xl:w-60 mx-2" />
 
-          {/* CTA + mobile trigger */}
+          {/* CTA + theme switcher + mobile trigger */}
           <div className="flex items-center gap-2">
             <a
               href={site.bot.inviteUrl}
@@ -105,6 +107,9 @@ export default function Navbar() {
               Invite
               <ExternalLink className="h-3.5 w-3.5" />
             </a>
+            <div className="hidden sm:flex">
+              <ThemeSwitcher />
+            </div>
             <button
               onClick={() => setOpen((o) => !o)}
               className="md:hidden liquid-glass h-10 w-10 rounded-full grid place-items-center"

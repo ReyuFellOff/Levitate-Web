@@ -45,7 +45,7 @@ export default function FloatingEmojis({ count = 16 }: { count?: number }) {
             top: `${item.top}%`,
             fontSize: item.size,
             opacity: item.opacity,
-            filter: 'drop-shadow(0 0 8px hsl(265 88% 76% / 0.35))',
+            filter: 'drop-shadow(0 0 8px hsl(227 95% 71% / 0.35))',
           }}
           animate={{
             y: [0, -item.drift, 0],
