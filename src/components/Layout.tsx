@@ -8,6 +8,7 @@ import AuroraBackground from './AuroraBackground';
 import TwinkleStars from './TwinkleStars';
 import FloatingEmojis from './FloatingEmojis';
 import AnnouncementBadge from './AnnouncementBadge';
+import CursorTrail from './CursorTrail';
 
 function CursorGlow() {
   const rawX = useMotionValue(-300);
@@ -51,6 +52,7 @@ export default function Layout() {
       <TwinkleStars />
       <FloatingEmojis />
       <CursorGlow />
+      <CursorTrail />
       <AnnouncementBadge />
       <Navbar />
       <main className="flex-1 pt-24 relative z-10">

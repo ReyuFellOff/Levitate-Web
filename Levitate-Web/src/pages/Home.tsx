@@ -5,7 +5,7 @@ import {
   useMotionValue, useSpring, useTransform, useInView,
   AnimatePresence,
 } from 'framer-motion';
-import { ExternalLink, ArrowRight, Terminal, ChevronDown, ChevronUp } from 'lucide-react';
+import { ExternalLink, ArrowRight, Terminal, ChevronDown } from 'lucide-react';
 import { site } from '@/config/site';
 import starSticker from '@/assets/stickers/star.png';
 import moonSticker from '@/assets/stickers/moon.png';
@@ -25,8 +25,12 @@ function FloatingSticker({
       src={src}
       alt={alt}
       draggable={false}
-      className={`pointer-events-none select-none drop-shadow-[0_8px_24px_hsl(227_95%_71%/0.45)] ${className ?? ''}`}
-      style={{ width: size, height: size }}
+      className={`pointer-events-none select-none ${className ?? ''}`}
+      style={{
+        width:  size,
+        height: size,
+        filter: 'drop-shadow(0 8px 24px hsl(var(--primary) / 0.45)) hue-rotate(var(--sticker-hue-shift, 0deg))',
+      }}
       animate={{ y: [0, -14, 0], rotate: [-rotate, rotate, -rotate] }}
       transition={{ duration, delay, repeat: Infinity, ease: 'easeInOut' }}
     />
@@ -123,6 +127,28 @@ function TiltCard({ children, className }: { children: React.ReactNode; classNam
             transparent 58%)`,
         }}
       />
+      {children}
+    </motion.div>
+  );
+}
+
+/**
+ * Blur-fade reveal wrapper — wraps any content and animates it in with
+ * a soft blur+fade+slide when it enters the viewport.
+ */
+function Reveal({
+  children,
+  delay = 0,
+  className,
+}: { children: React.ReactNode; delay?: number; className?: string }) {
+  return (
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y: 28, filter: 'blur(8px)' }}
+      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
+    >
       {children}
     </motion.div>
   );
@@ -350,12 +376,9 @@ function Features() {
   return (
     <section className="container max-w-5xl py-20 relative">
       <FloatingSticker src={shieldSticker} alt="" className="absolute -top-4 right-4 md:right-16 hidden sm:block" size={64} duration={5.5} rotate={7} />
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center max-w-2xl mx-auto"
-      >
+
+      {/* Section heading — blur-fade reveal */}
+      <Reveal className="text-center max-w-2xl mx-auto">
         <span className="text-xs font-semibold uppercase tracking-widest text-primary">✨ What it does</span>
         <h2 className="mt-3 font-display font-bold text-4xl md:text-5xl tracking-tight">
           Everything your server needs
@@ -363,16 +386,16 @@ function Features() {
         <p className="mt-4 text-muted-foreground max-w-md mx-auto text-sm">
           Every command built tight. Every interaction refined and shipped as Components V2.
         </p>
-      </motion.div>
+      </Reveal>
 
       <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5" style={{ perspective: 1200 }}>
         {site.features.map((f, i) => (
           <motion.div
             key={f.title}
-            initial={{ opacity: 0, y: 36 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 36, filter: 'blur(8px)' }}
+            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.55, delay: i * 0.07 }}
+            transition={{ duration: 0.65, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
           >
             <TiltCard className="liquid-glass rounded-2xl p-7 h-full cursor-default">
               <motion.div
@@ -424,26 +447,22 @@ function CommandStrip() {
 
   return (
     <section className="py-20">
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="container max-w-5xl text-center mb-12"
-      >
+      {/* Heading reveal */}
+      <Reveal className="container max-w-5xl text-center mb-12">
         <span className="text-xs font-semibold uppercase tracking-widest text-primary">At a glance</span>
         <h2 className="mt-3 font-display font-bold text-3xl md:text-4xl tracking-tight">
           Powerful. Concise. Instant.
         </h2>
-      </motion.div>
+      </Reveal>
 
       <div className="container max-w-5xl grid sm:grid-cols-2 gap-3">
         {snippets.map((s, i) => (
           <motion.div
             key={s.cmd}
-            initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20, filter: 'blur(5px)' }}
+            whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
             viewport={{ once: true, margin: '-30px' }}
-            transition={{ delay: i * 0.06, duration: 0.45 }}
+            transition={{ delay: i * 0.06, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             whileHover={{ scale: 1.018, transition: { type: 'spring', stiffness: 300, damping: 20 } }}
             className="liquid-glass rounded-xl px-5 py-4 flex items-start gap-4 cursor-default"
           >
@@ -470,57 +489,49 @@ function Faq() {
 
   return (
     <section className="container max-w-3xl py-20">
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center"
-      >
+      {/* Heading reveal */}
+      <Reveal className="text-center">
         <span className="text-xs font-semibold uppercase tracking-widest text-primary">FAQ</span>
         <h2 className="mt-3 font-display font-bold text-4xl md:text-5xl tracking-tight">
           Questions, answered
         </h2>
-      </motion.div>
+      </Reveal>
 
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.15 }}
-        className="mt-12 liquid-glass rounded-3xl overflow-hidden divide-y divide-border/40"
-      >
-        {site.faqs.map((f, i) => (
-          <div key={i}>
-            <button
-              onClick={() => toggle(i)}
-              className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-muted/20 transition-colors"
-            >
-              <span className="font-display font-semibold text-[15px]">{f.q}</span>
-              <motion.span
-                animate={{ rotate: open === i ? 180 : 0 }}
-                transition={{ duration: 0.3 }}
-                className="flex-shrink-0 text-muted-foreground"
+      <Reveal delay={0.12} className="mt-12">
+        <div className="liquid-glass rounded-3xl overflow-hidden divide-y divide-border/40">
+          {site.faqs.map((f, i) => (
+            <div key={i}>
+              <button
+                onClick={() => toggle(i)}
+                className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-muted/20 transition-colors"
               >
-                <ChevronDown className="h-4 w-4" />
-              </motion.span>
-            </button>
-            <AnimatePresence initial={false}>
-              {open === i && (
-                <motion.div
-                  key="content"
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-                  style={{ overflow: 'hidden' }}
+                <span className="font-display font-semibold text-[15px]">{f.q}</span>
+                <motion.span
+                  animate={{ rotate: open === i ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex-shrink-0 text-muted-foreground"
                 >
-                  <p className="px-6 pb-6 text-sm text-muted-foreground leading-relaxed">{f.a}</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        ))}
-      </motion.div>
+                  <ChevronDown className="h-4 w-4" />
+                </motion.span>
+              </button>
+              <AnimatePresence initial={false}>
+                {open === i && (
+                  <motion.div
+                    key="content"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                    style={{ overflow: 'hidden' }}
+                  >
+                    <p className="px-6 pb-6 text-sm text-muted-foreground leading-relaxed">{f.a}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
+        </div>
+      </Reveal>
     </section>
   );
 }
@@ -532,10 +543,10 @@ function Cta() {
   return (
     <section className="container max-w-5xl py-10 pb-8">
       <motion.div
-        initial={{ opacity: 0, y: 32, scale: 0.95 }}
-        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        initial={{ opacity: 0, y: 32, scale: 0.95, filter: 'blur(10px)' }}
+        whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
         viewport={{ once: true }}
-        transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         className="relative overflow-hidden rounded-3xl px-8 md:px-16 py-16 text-center"
         style={{ background: 'var(--gradient-aurora)', backgroundSize: '300% 300%', animation: 'aurora 24s linear infinite' }}
       >

@@ -130,9 +130,58 @@ const server = createServer(async (req, res) => {
     return;
   }
 
+  // ── Developer profile ──────────────────────────────────────────────────────
+  if (url === '/api/developer') {
+    try {
+      const profile = await getDeveloperProfile();
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(profile));
+    } catch (err) {
+      console.error('[API SERVER] Developer profile error:', err.message);
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: err.message }));
+    }
+    return;
+  }
+
   res.writeHead(404, { 'Content-Type': 'application/json' });
   res.end(JSON.stringify({ error: 'Not found' }));
 });
+
+// ── Developer profile (avatar decoration) ────────────────────────────────────
+
+const DEV_USER_ID  = '922491166149214218';
+const DEV_CACHE    = { data: null, expiresAt: 0 };   // 10-minute TTL
+const DEV_CACHE_MS = 60_000; // 1 minute — so decoration changes appear quickly
+
+async function getDeveloperProfile() {
+  const now = Date.now();
+  if (DEV_CACHE.data && now < DEV_CACHE.expiresAt) return DEV_CACHE.data;
+
+  const token = process.env.DISCORD_TOKEN;
+  if (!token) throw new Error('DISCORD_TOKEN not set');
+
+  const res = await fetch(`https://discord.com/api/v10/users/${DEV_USER_ID}`, {
+    headers: { Authorization: `Bot ${token}` },
+  });
+  if (!res.ok) throw new Error(`Discord API ${res.status}`);
+
+  const user = await res.json();
+  const profile = {
+    id:              user.id,
+    username:        user.username,
+    avatar:          user.avatar
+      ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${user.avatar.startsWith('a_') ? 'gif' : 'png'}?size=256`
+      : null,
+    decoration:      user.avatar_decoration_data?.asset
+      ? `https://cdn.discordapp.com/avatar-decoration-presets/${user.avatar_decoration_data.asset}.png`
+      : null,
+  };
+
+  DEV_CACHE.data      = profile;
+  DEV_CACHE.expiresAt = now + DEV_CACHE_MS;
+  return profile;
+}
 
 // ── Boot ──────────────────────────────────────────────────────────────────────
 

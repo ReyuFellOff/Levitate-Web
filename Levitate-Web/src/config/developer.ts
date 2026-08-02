@@ -10,9 +10,9 @@
 export const developerConfig = {
   /* ── Identity ─────────────────────────────────────────── */
   name:             'Reyansh',
-  discordUsername:  '__reyansh__',
-  githubUrl:        'https://github.com/RXS-reyansh',
-  avatar:           'https://i.ibb.co/NnyxGwgY/square-crop-3.jpg', // leave '' for the default fallback
+  discordUsername:  'reyansh.is.stupid',
+  githubUrl:        'https://github.com/ReyuFellOff',
+  avatar:           'https://i.ibb.co/vxFXVzhk/square-crop.jpg', // leave '' for the default fallback
 
   /* ── Short bio — freely customisable ─────────────────────
      Shown directly under the developer's name on the About page. */

@@ -118,16 +118,20 @@
     @apply tracking-tight;
   }
 
+  /* Selection uses CSS variables so it adapts to every theme */
   ::selection {
-    background: hsl(227 95% 71% / 0.35);
-    color: hsl(228 40% 97%);
+    background: hsl(var(--primary) / 0.30);
+    color: hsl(var(--foreground));
   }
 
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: hsl(var(--background)); }
   ::-webkit-scrollbar-thumb {
-    background: hsl(var(--glass-border) / 0.6);
+    background: hsl(var(--primary) / 0.45);
     border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.65);
   }
 }
 
@@ -139,9 +143,14 @@
     -webkit-backdrop-filter: blur(14px) saturate(160%);
     border:             1px solid hsl(var(--glass-border) / 0.35);
     box-shadow:         var(--shadow-glass);
+    transition:         border-color 300ms ease, background 300ms ease, box-shadow 300ms ease;
+  }
+  .glass:hover {
+    border-color: hsl(var(--glass-border) / 0.58);
+    background:   hsl(var(--glass-bg) / 0.70);
   }
 
-  /* ── Liquid glass (with top-shine) ── */
+  /* ── Liquid glass (with top-shine + glassmorphism hover highlight) ── */
   .liquid-glass {
     position:           relative;
     background:         hsl(var(--glass-bg) / 0.5);
@@ -150,16 +159,51 @@
     border:             1px solid hsl(var(--glass-border) / 0.4);
     box-shadow:         var(--shadow-glass);
     overflow:           hidden;
+    /* smooth hover transitions */
+    transition:         border-color 320ms ease,
+                        background   320ms ease,
+                        box-shadow   320ms ease;
   }
+  /* Top-corner shine always visible */
   .liquid-glass::before {
-    content:  '';
-    position: absolute;
-    inset:    0;
+    content:    '';
+    position:   absolute;
+    inset:      0;
     background: linear-gradient(135deg,
       hsl(var(--glass-shine) / 0.07) 0%,
       transparent 40%
     );
     pointer-events: none;
+    transition: opacity 320ms ease;
+    z-index: 1;
+  }
+  /* Glassmorphism hover highlight: brighter border + boosted shine */
+  .liquid-glass:hover {
+    border-color: hsl(var(--glass-border) / 0.68);
+    background:   hsl(var(--glass-bg) / 0.68);
+    box-shadow:   var(--shadow-glass),
+                  0 0 0 1px hsl(var(--primary) / 0.07);
+  }
+  .liquid-glass:hover::before {
+    opacity: 2; /* doubles the ::before opacity from 1→2 (clamped to 1 by browser) */
+  }
+  /* Sweep highlight that appears on hover via ::after */
+  .liquid-glass::after {
+    content:    '';
+    position:   absolute;
+    inset:      0;
+    background: linear-gradient(135deg,
+      hsl(var(--glass-shine) / 0.09) 0%,
+      hsl(var(--glass-shine) / 0.02) 35%,
+      transparent 60%
+    );
+    opacity:        0;
+    pointer-events: none;
+    transition:     opacity 320ms ease;
+    z-index: 1;
+  }
+  .liquid-glass:hover::after {
+    opacity: 1;
   }
 
   /* ── Gradient text ── */

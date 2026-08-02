@@ -16,6 +16,47 @@ export default function ThemeSwitcher() {
     timeoutRef.current = setTimeout(() => setOpen(false), 120);
   };
 
+  const darkThemes  = themes.filter(t => t.mode === 'dark');
+  const lightThemes = themes.filter(t => t.mode === 'light');
+
+  const ThemeRow = ({ t }: { t: (typeof themes)[0] }) => {
+    const isActive = t.id === active.id;
+    return (
+      <button
+        key={t.id}
+        onClick={() => { setTheme(t.id); }}
+        className="flex items-center gap-3 px-2 py-1.5 rounded-xl hover:bg-white/8 transition-colors duration-150 text-left group w-full"
+      >
+        {/* Colour circle */}
+        <span
+          className="h-6 w-6 rounded-full flex-shrink-0 transition-transform duration-200 group-hover:scale-110"
+          style={{
+            background:  t.previewGradient,
+            boxShadow:   isActive
+              ? '0 0 0 2.5px hsl(var(--foreground) / 0.85)'
+              : '0 0 0 1.5px hsl(var(--border) / 0.5)',
+          }}
+        />
+        {/* Label */}
+        <span
+          className={`text-xs font-medium transition-colors ${
+            isActive ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground'
+          }`}
+        >
+          {t.name}
+        </span>
+
+        {/* Active dot */}
+        {isActive && (
+          <motion.span
+            layoutId="theme-active-dot"
+            className="ml-auto h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0"
+          />
+        )}
+      </button>
+    );
+  };
+
   return (
     <div
       className="relative flex items-center"
@@ -42,7 +83,7 @@ export default function ThemeSwitcher() {
           >
             {/* Panel */}
             <div
-              className="liquid-glass rounded-2xl p-3 flex flex-col gap-2.5 min-w-[160px]"
+              className="liquid-glass rounded-2xl p-3 flex flex-col gap-1 min-w-[168px]"
               style={{
                 boxShadow: 'var(--shadow-glass)',
                 background: 'hsl(var(--glass-bg) / 0.92)',
@@ -50,47 +91,20 @@ export default function ThemeSwitcher() {
               onMouseEnter={show}
               onMouseLeave={hide}
             >
-              <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground px-1 pb-0.5">
-                Colour Theme
+              {/* Dark section */}
+              <p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground px-2 pt-0.5 pb-1">
+                Dark
               </p>
+              {darkThemes.map(t => <ThemeRow key={t.id} t={t} />)}
 
-              {themes.map((t) => {
-                const isActive = t.id === active.id;
-                return (
-                  <button
-                    key={t.id}
-                    onClick={() => { setTheme(t.id); setOpen(false); }}
-                    className="flex items-center gap-3 px-2 py-1.5 rounded-xl hover:bg-white/8 transition-colors duration-150 text-left group w-full"
-                  >
-                    {/* Colour circle */}
-                    <span
-                      className="h-7 w-7 rounded-full flex-shrink-0 transition-transform duration-200 group-hover:scale-110"
-                      style={{
-                        background:  t.previewGradient,
-                        boxShadow:   isActive
-                          ? '0 0 0 2.5px hsl(var(--foreground) / 0.85)'
-                          : '0 0 0 1.5px hsl(var(--border) / 0.5)',
-                      }}
-                    />
-                    {/* Label */}
-                    <span
-                      className={`text-xs font-medium transition-colors ${
-                        isActive ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground'
-                      }`}
-                    >
-                      {t.name}
-                    </span>
+              {/* Divider */}
+              <div className="my-1.5 border-t border-border/30" />
 
-                    {/* Active dot */}
-                    {isActive && (
-                      <motion.span
-                        layoutId="theme-active-dot"
-                        className="ml-auto h-1.5 w-1.5 rounded-full bg-primary flex-shrink-0"
-                      />
-                    )}
-                  </button>
-                );
-              })}
+              {/* Light section */}
+              <p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground px-2 pb-1">
+                Light
+              </p>
+              {lightThemes.map(t => <ThemeRow key={t.id} t={t} />)}
             </div>
           </motion.div>
         )}
