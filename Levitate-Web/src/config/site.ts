@@ -250,7 +250,8 @@ export const site = {
         { name: '$embed',     aliases: ['embedbuilder', 'eb'],              permission: null,              description: 'Interactive classic-embed builder with live preview, fields, and link buttons.', usage: '$embed' },
         { name: '$container', aliases: ['cb', 'containerbuilder', 'build'], permission: null,              description: 'Interactive CV2 message builder: text, info card, photo grid, quick links.', usage: '$container' },
         { name: '$webhook',   aliases: ['webhooks', 'wh'],                  permission: 'Manage Webhooks', description: 'Interactive webhook manager: create, send, rename, move, delete.', usage: '$webhook' },
-        { name: '$autorole',  aliases: ['ar', 'autoroles'],                permission: 'Manage Roles',   description: 'Configure roles given automatically to new members or bots.',     usage: '$autorole member add @role\n$autorole bot add @role\n$autorole member|bot remove @role\n$autorole list\n$autorole clear' },
+        { name: '$autorole',    aliases: ['ar', 'autoroles'],                permission: 'Manage Roles',    description: 'Configure roles given automatically to new members or bots.',     usage: '$autorole member add @role\n$autorole bot add @role\n$autorole member|bot remove @role\n$autorole list\n$autorole clear' },
+        { name: '$impersonate', aliases: ['mimic'],                          permission: 'Manage Messages', description: 'Send a message as another server member via a temporary webhook using their server nickname and avatar. Webhook is deleted immediately after sending, and the command message is deleted so only the impersonated message remains.', usage: '$impersonate <@user|ID> <text>' },
       ],
     },
     {
