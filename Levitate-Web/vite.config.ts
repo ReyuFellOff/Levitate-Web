@@ -20,4 +20,9 @@ export default defineConfig({
       },
     },
   },
+  preview: {
+    host: true,
+    port: 5000,
+    allowedHosts: true,
+  },
 });

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { AnimatePresence, motion, useMotionValue, useSpring } from 'framer-motion';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import Marquee from './Marquee';
@@ -56,7 +56,17 @@ export default function Layout() {
       <AnnouncementBadge />
       <Navbar />
       <main className="flex-1 pt-24 relative z-10">
-        <Outlet />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={pathname}
+            initial={{ opacity: 0, y: 14, filter: 'blur(5px)' }}
+            animate={{ opacity: 1,  y: 0,  filter: 'blur(0px)' }}
+            exit={{    opacity: 0,  y: -10, filter: 'blur(5px)' }}
+            transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <Outlet />
+          </motion.div>
+        </AnimatePresence>
       </main>
       <div className="relative z-10">
         <Marquee />

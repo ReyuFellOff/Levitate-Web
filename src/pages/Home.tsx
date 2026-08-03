@@ -1,39 +1,168 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   motion,
   useMotionValue, useSpring, useTransform, useInView,
   AnimatePresence,
+  type MotionValue,
 } from 'framer-motion';
 import { ExternalLink, ArrowRight, Terminal, ChevronDown } from 'lucide-react';
 import { site } from '@/config/site';
-import starSticker from '@/assets/stickers/star.png';
-import moonSticker from '@/assets/stickers/moon.png';
-import cloudSticker from '@/assets/stickers/cloud.png';
-import shieldSticker from '@/assets/stickers/shield.png';
-import orbSticker from '@/assets/stickers/orb.png';
 
-/** A floating, gently bobbing decorative sticker image. */
-function FloatingSticker({
-  src, alt, className, size = 56, duration = 5, delay = 0, rotate = 8,
+/* ─────────────────────────────────────────────────────────────────────────────
+   Aesthetic SVG decorative shapes — replace childish emoji-sticker PNGs.
+   Each component uses useId() for unique gradient IDs (safe for multi-instance).
+───────────────────────────────────────────────────────────────────────────── */
+
+/** Sharp 4-pointed sparkle / starburst */
+function StarburstDecor({ size }: { size: number }) {
+  const id = useId();
+  return (
+    <svg width={size} height={size} viewBox="0 0 48 48" fill="none">
+      <defs>
+        <radialGradient id={`${id}r`} cx="50%" cy="50%" r="50%">
+          <stop offset="0%"   stopColor="#e9d5ff" />
+          <stop offset="55%"  stopColor="#a78bfa" />
+          <stop offset="100%" stopColor="#6d28d9" stopOpacity="0.6" />
+        </radialGradient>
+      </defs>
+      <path d="M24 1 L27.2 20.8 L47 24 L27.2 27.2 L24 47 L20.8 27.2 L1 24 L20.8 20.8 Z"
+        fill={`url(#${id}r)`} />
+      <circle cx="24" cy="24" r="4.5" fill="white" opacity="0.45" />
+    </svg>
+  );
+}
+
+/** Slim faceted crystal shard — translucent, glassy, multi-layer */
+function CrystalDecor({ size }: { size: number }) {
+  const id = useId();
+  return (
+    <svg width={size} height={Math.round(size * 1.35)} viewBox="0 0 26 36" fill="none">
+      <defs>
+        <linearGradient id={`${id}b`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%"   stopColor="#ddd6fe" stopOpacity="0.65" />
+          <stop offset="50%"  stopColor="#7c3aed" stopOpacity="0.5"  />
+          <stop offset="100%" stopColor="#2e1065" stopOpacity="0.35" />
+        </linearGradient>
+        <linearGradient id={`${id}h`} x1="0" y1="0" x2="0.7" y2="1">
+          <stop offset="0%"   stopColor="white" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="white" stopOpacity="0.0"  />
+        </linearGradient>
+      </defs>
+      {/* Slim body — points span 20 px wide in a 26-wide viewBox */}
+      <polygon points="13,1 22,9 19,35 7,35 4,9" fill={`url(#${id}b)`} />
+      {/* Right face subtle lighter */}
+      <polygon points="13,1 22,9 19,35 13,35" fill="white" opacity="0.07" />
+      {/* Top catch-light facet */}
+      <polygon points="13,1 22,9 13,13 4,9"   fill={`url(#${id}h)`} />
+    </svg>
+  );
+}
+
+/** Orbital halo ring — thin outer circle, tilted ellipse, center dot */
+function RingDecor({ size }: { size: number }) {
+  const id = useId();
+  return (
+    <svg width={size} height={size} viewBox="0 0 48 48" fill="none">
+      <defs>
+        <linearGradient id={`${id}l`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%"   stopColor="#f0abfc" />
+          <stop offset="50%"  stopColor="#818cf8" />
+          <stop offset="100%" stopColor="#38bdf8" stopOpacity="0.7" />
+        </linearGradient>
+      </defs>
+      <circle cx="24" cy="24" r="21" stroke={`url(#${id}l)`} strokeWidth="1.5" />
+      <circle cx="24" cy="24" r="9"  stroke={`url(#${id}l)`} strokeWidth="1"   opacity="0.5" />
+      <ellipse cx="24" cy="24" rx="21" ry="8"
+        stroke={`url(#${id}l)`} strokeWidth="1" opacity="0.45"
+        strokeDasharray="5 3" transform="rotate(-28 24 24)" />
+      <circle cx="24" cy="24" r="3" fill="#c084fc" opacity="0.9" />
+    </svg>
+  );
+}
+
+/** Glass prism with coloured refraction rays */
+function PrismDecor({ size }: { size: number }) {
+  const id = useId();
+  return (
+    <svg width={size} height={size} viewBox="0 0 56 52" fill="none">
+      <defs>
+        <linearGradient id={`${id}b`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%"   stopColor="#818cf8" stopOpacity="0.92" />
+          <stop offset="100%" stopColor="#c084fc" stopOpacity="0.72" />
+        </linearGradient>
+        <linearGradient id={`${id}h`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stopColor="white" stopOpacity="0.22" />
+          <stop offset="100%" stopColor="white" stopOpacity="0.0"  />
+        </linearGradient>
+      </defs>
+      <polygon points="28,4 50,46 6,46" fill={`url(#${id}b)`} />
+      <polygon points="28,4 6,46 28,46"  fill="#1e1b4b" opacity="0.22" />
+      <polygon points="28,4 50,46 28,46" fill={`url(#${id}h)`} />
+      {/* Refraction rays */}
+      <line x1="50" y1="46" x2="57" y2="32" stroke="#f472b6" strokeWidth="1.8" strokeLinecap="round" opacity="0.75" />
+      <line x1="50" y1="46" x2="59" y2="43" stroke="#60a5fa" strokeWidth="1.4" strokeLinecap="round" opacity="0.65" />
+      <line x1="50" y1="46" x2="55" y2="52" stroke="#4ade80" strokeWidth="1.1" strokeLinecap="round" opacity="0.55" />
+    </svg>
+  );
+}
+
+/** Hexagonal sigil — overlapping triangles (Star of David geometry) + dots */
+function RuneDecor({ size }: { size: number }) {
+  const id = useId();
+  return (
+    <svg width={size} height={size} viewBox="0 0 48 48" fill="none">
+      <defs>
+        <linearGradient id={`${id}l`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%"   stopColor="#a5b4fc" />
+          <stop offset="100%" stopColor="#e879f9" stopOpacity="0.85" />
+        </linearGradient>
+      </defs>
+      {/* Outer hexagon */}
+      <polygon points="24,3 41,13 41,35 24,45 7,35 7,13"
+        stroke={`url(#${id}l)`} strokeWidth="1.5" fill="none" />
+      {/* Upward triangle */}
+      <polygon points="24,10 38,33 10,33"
+        stroke={`url(#${id}l)`} strokeWidth="1" fill="none" opacity="0.65" />
+      {/* Downward triangle */}
+      <polygon points="24,38 10,15 38,15"
+        stroke={`url(#${id}l)`} strokeWidth="1" fill="none" opacity="0.45" />
+      {/* Center */}
+      <circle cx="24" cy="24" r="3.5" fill={`url(#${id}l)`} opacity="0.9" />
+      {/* Corner accent dots */}
+      <circle cx="24" cy="3"  r="1.5" fill="#a5b4fc" opacity="0.7" />
+      <circle cx="41" cy="35" r="1.5" fill="#e879f9" opacity="0.7" />
+      <circle cx="7"  cy="35" r="1.5" fill="#818cf8" opacity="0.7" />
+    </svg>
+  );
+}
+
+/**
+ * Floating decorative element with parallax depth.
+ * Outer motion.div: cursor parallax translation.
+ * Inner motion.div: continuous float + rotate cycle.
+ */
+function FloatingDecor({
+  children, className, size = 56, duration = 5, delay = 0, rotate = 8,
+  parallaxX, parallaxY,
 }: {
-  src: string; alt: string; className?: string; size?: number;
+  children: React.ReactNode; className?: string; size?: number;
   duration?: number; delay?: number; rotate?: number;
+  parallaxX?: MotionValue<number>; parallaxY?: MotionValue<number>;
 }) {
   return (
-    <motion.img
-      src={src}
-      alt={alt}
-      draggable={false}
+    <motion.div
       className={`pointer-events-none select-none ${className ?? ''}`}
-      style={{
-        width:  size,
-        height: size,
-        filter: 'drop-shadow(0 8px 24px hsl(var(--primary) / 0.45)) hue-rotate(var(--sticker-hue-shift, 0deg))',
-      }}
-      animate={{ y: [0, -14, 0], rotate: [-rotate, rotate, -rotate] }}
-      transition={{ duration, delay, repeat: Infinity, ease: 'easeInOut' }}
-    />
+      style={{ x: parallaxX, y: parallaxY, width: size }}
+    >
+      <motion.div
+        className="decor-color"
+        animate={{ y: [0, -14, 0], rotate: [-rotate, rotate, -rotate] }}
+        transition={{ duration, delay, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        {children}
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -170,6 +299,21 @@ function Hero() {
   const cardBX = useTransform(sx, (v) => v * 22);
   const cardBY = useTransform(sy, (v) => v * 22);
 
+  // Per-sticker parallax — each depth multiplier is distinct so they
+  // appear to sit on different Z-planes as the cursor moves.
+  const starX   = useTransform(sx, (v) => v * -36); // closest — moves most
+  const starY   = useTransform(sy, (v) => v * -28);
+  const moonX   = useTransform(sx, (v) => v *  30);
+  const moonY   = useTransform(sy, (v) => v *  22);
+  const cloudX  = useTransform(sx, (v) => v * -18); // furthest — moves least
+  const cloudY  = useTransform(sy, (v) => v * -26);
+  const orbX    = useTransform(sx, (v) => v *  26);
+  const orbY    = useTransform(sy, (v) => v *  18);
+
+  // Subtle parallax on the hero artwork (logo) itself
+  const logoParallaxX = useTransform(sx, (v) => v * -10);
+  const logoParallaxY = useTransform(sy, (v) => v * -10);
+
   const onMove  = (e: React.MouseEvent<HTMLDivElement>) => {
     const r = stageRef.current?.getBoundingClientRect();
     if (!r) return;
@@ -305,27 +449,29 @@ function Hero() {
                 x: glowX, y: glowY,
               }}
             />
-            {/* Central logo */}
+            {/* Central logo — outer div handles parallax; inner handles bobbing */}
             <div className="absolute inset-0 grid place-items-center">
-              <motion.div
-                animate={{ y: [0, -18, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-                className="h-44 w-44 rounded-[2.5rem] bg-aurora animate-aurora shadow-[0_30px_80px_hsl(262_70%_73%/0.6)] grid place-items-center relative overflow-hidden"
-              >
-                {/* Inner shimmer */}
+              <motion.div style={{ x: logoParallaxX, y: logoParallaxY }}>
                 <motion.div
-                  className="absolute inset-0"
-                  style={{ background: 'linear-gradient(135deg, hsl(228 80% 96% / 0.25) 0%, transparent 50%)' }}
-                  animate={{ opacity: [0.4, 0.9, 0.4] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                />
-                {site.bot.botAvatar ? (
-                  <img src={site.bot.botAvatar} alt={site.bot.name} className="h-full w-full object-cover" />
-                ) : (
-                  <span className="relative font-display font-extrabold text-white text-7xl select-none">
-                    L
-                  </span>
-                )}
+                  animate={{ y: [0, -18, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+                  className="h-44 w-44 rounded-[2.5rem] bg-aurora animate-aurora shadow-[0_30px_80px_hsl(262_70%_73%/0.6)] grid place-items-center relative overflow-hidden"
+                >
+                  {/* Inner shimmer */}
+                  <motion.div
+                    className="absolute inset-0"
+                    style={{ background: 'linear-gradient(135deg, hsl(228 80% 96% / 0.25) 0%, transparent 50%)' }}
+                    animate={{ opacity: [0.4, 0.9, 0.4] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                  {site.bot.botAvatar ? (
+                    <img src={site.bot.botAvatar} alt={site.bot.name} className="h-full w-full object-cover" />
+                  ) : (
+                    <span className="relative font-display font-extrabold text-white text-7xl select-none">
+                      L
+                    </span>
+                  )}
+                </motion.div>
               </motion.div>
             </div>
 
@@ -357,11 +503,19 @@ function Hero() {
               </div>
             </motion.div>
 
-            {/* Floating cute stickers */}
-            <FloatingSticker src={starSticker}   alt="" className="absolute -top-6 left-6 z-20"     size={52} duration={4.5} delay={0}   rotate={10} />
-            <FloatingSticker src={moonSticker}   alt="" className="absolute top-1/3 -right-8 z-20"  size={48} duration={5.5} delay={0.6} rotate={8} />
-            <FloatingSticker src={cloudSticker}  alt="" className="absolute -bottom-4 right-1/4 z-20" size={58} duration={6} delay={1.1} rotate={6} />
-            <FloatingSticker src={orbSticker}    alt="" className="absolute bottom-1/4 -left-10 z-20" size={44} duration={5} delay={1.6} rotate={12} />
+            {/* Decorative shapes — each depth multiplier places them on a distinct Z-plane */}
+            <FloatingDecor className="absolute -top-6 left-6 z-20"        size={36} duration={4.5} delay={0}   rotate={10} parallaxX={starX}  parallaxY={starY}>
+              <StarburstDecor size={36} />
+            </FloatingDecor>
+            <FloatingDecor className="absolute top-1/3 -right-8 z-20"     size={34} duration={5.5} delay={0.6} rotate={8}  parallaxX={moonX}  parallaxY={moonY}>
+              <RingDecor size={34} />
+            </FloatingDecor>
+            <FloatingDecor className="absolute -bottom-4 right-1/4 z-20"  size={42} duration={6}   delay={1.1} rotate={6}  parallaxX={cloudX} parallaxY={cloudY}>
+              <PrismDecor size={42} />
+            </FloatingDecor>
+            <FloatingDecor className="absolute bottom-1/4 -left-10 z-20"  size={30} duration={5}   delay={1.6} rotate={12} parallaxX={orbX}   parallaxY={orbY}>
+              <CrystalDecor size={30} />
+            </FloatingDecor>
           </div>
         </motion.div>
       </div>
@@ -375,7 +529,9 @@ function Hero() {
 function Features() {
   return (
     <section className="container max-w-5xl py-20 relative">
-      <FloatingSticker src={shieldSticker} alt="" className="absolute -top-4 right-4 md:right-16 hidden sm:block" size={64} duration={5.5} rotate={7} />
+      <FloatingDecor className="absolute -top-4 right-4 md:right-16 hidden sm:block" size={44} duration={5.5} rotate={7}>
+        <RuneDecor size={44} />
+      </FloatingDecor>
 
       {/* Section heading — blur-fade reveal */}
       <Reveal className="text-center max-w-2xl mx-auto">
@@ -550,8 +706,12 @@ function Cta() {
         className="relative overflow-hidden rounded-3xl px-8 md:px-16 py-16 text-center"
         style={{ background: 'var(--gradient-aurora)', backgroundSize: '300% 300%', animation: 'aurora 24s linear infinite' }}
       >
-        <FloatingSticker src={orbSticker}  alt="" className="absolute top-4 right-8 hidden sm:block" size={50} duration={5} rotate={10} />
-        <FloatingSticker src={starSticker} alt="" className="absolute bottom-6 left-8 hidden sm:block" size={46} duration={4.5} delay={0.4} rotate={12} />
+        <FloatingDecor className="absolute top-4 right-8 hidden sm:block" size={34} duration={5} rotate={10}>
+          <CrystalDecor size={34} />
+        </FloatingDecor>
+        <FloatingDecor className="absolute bottom-6 left-8 hidden sm:block" size={32} duration={4.5} delay={0.4} rotate={12}>
+          <StarburstDecor size={32} />
+        </FloatingDecor>
         {/* Floating orbs inside CTA */}
         <motion.div
           className="absolute -top-14 -left-14 h-48 w-48 rounded-full bg-white/10 blur-3xl pointer-events-none"

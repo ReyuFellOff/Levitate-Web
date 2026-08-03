@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Server, Users, Hash, Terminal, RefreshCw } from 'lucide-react';
+import { Server, Users, Hash, Terminal, RefreshCw, PowerOff } from 'lucide-react';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -76,12 +76,21 @@ function SkeletonCard() {
 
 function OfflineCard() {
   return (
-    <div className="liquid-glass rounded-2xl p-12 flex flex-col items-center gap-3 text-center">
-      <div className="h-12 w-12 rounded-full bg-red-500/10 grid place-items-center">
-        <span className="h-3 w-3 rounded-full bg-red-500 block" />
+    <div className="liquid-glass rounded-2xl p-12 flex flex-col items-center gap-5 text-center">
+      {/* PowerOff icon — immediately readable as "turned off", no red, muted primary glow */}
+      <motion.div
+        animate={{ opacity: [0.38, 0.72, 0.38] }}
+        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        style={{ filter: 'drop-shadow(0 0 12px hsl(var(--primary) / 0.28))' }}
+      >
+        <PowerOff className="h-11 w-11 text-primary/55" strokeWidth={1.4} />
+      </motion.div>
+      <div>
+        <p className="font-display font-semibold">Offline</p>
+        <p className="text-sm text-muted-foreground mt-1 max-w-[220px] mx-auto">
+          Stats are unavailable right now. Check back shortly.
+        </p>
       </div>
-      <p className="font-semibold">Offline</p>
-      <p className="text-sm text-muted-foreground">Stats are unavailable right now. Check back shortly.</p>
     </div>
   );
 }
@@ -149,8 +158,9 @@ export default function Stats() {
             ) : (
               <motion.div key="offline"
                 initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }}
-                className="liquid-glass px-4 py-2 rounded-full flex items-center gap-2 text-sm font-medium">
-                <span className="h-2 w-2 rounded-full bg-red-500 block" />
+                className="liquid-glass px-4 py-2 rounded-full flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                {/* Hollow ring — contrasts the filled green Live dot */}
+                <span className="h-2 w-2 rounded-full border border-primary/60 block opacity-70" />
                 Offline
               </motion.div>
             )}

@@ -246,4 +246,12 @@
     -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
             mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   }
+
+  /* ── Decorative shape colour shift ── */
+  @keyframes decorHueShift {
+    0%, 100% { filter: hue-rotate(0deg)   brightness(1);    }
+    30%       { filter: hue-rotate(32deg)  brightness(1.08); }
+    65%       { filter: hue-rotate(-22deg) brightness(0.95); }
+  }
+  .decor-color { animation: decorHueShift 11s ease-in-out infinite; }
 }
