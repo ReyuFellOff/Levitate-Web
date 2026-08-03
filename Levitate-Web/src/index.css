@@ -43,6 +43,14 @@
     --glass-border: 227 55% 62%;
     --glass-shine:  228 80% 96%;
 
+    /* ── Theme-aware decorative artwork tokens ── */
+    --decor-1: var(--primary);
+    --decor-2: var(--accent);
+    --decor-3: var(--primary-glow);
+    --decor-4: var(--secondary);
+    --decor-light: var(--foreground);
+    --decor-dark: var(--background);
+
     /* ── Gradients ── */
     --gradient-aurora: linear-gradient(135deg,
       hsl(227 95% 71%),
@@ -254,4 +262,12 @@
     65%       { filter: hue-rotate(-22deg) brightness(0.95); }
   }
   .decor-color { animation: decorHueShift 11s ease-in-out infinite; }
+
+  /* Theme-aware raster/decorative sticker treatment.  Individual assets can
+     opt in without baking a palette into the image itself. */
+  .sticker-color {
+    filter: hue-rotate(var(--sticker-hue-shift, 0deg))
+            drop-shadow(0 0 12px hsl(var(--primary) / 0.28));
+    transition: filter 450ms ease;
+  }
 }

@@ -39,13 +39,12 @@ export default function FloatingEmojis({ count = 16 }: { count?: number }) {
       {items.map((item) => (
         <motion.span
           key={item.id}
-          className="absolute"
+          className="absolute sticker-color"
           style={{
             left: `${item.left}%`,
             top: `${item.top}%`,
             fontSize: item.size,
             opacity: item.opacity,
-            filter: 'drop-shadow(0 0 8px hsl(227 95% 71% / 0.35))',
           }}
           animate={{
             y: [0, -item.drift, 0],

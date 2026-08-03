@@ -11,6 +11,8 @@ export const developerConfig = {
   /* ── Identity ─────────────────────────────────────────── */
   name:             'Reyansh',
   discordUsername:  'reyansh.is.stupid',
+  // Keep this in sync with xoxo/config/developerPanel.ts (`$developer`).
+  discordAddFriendUrl: 'https://discord.com/users/922491166149214218',
   githubUrl:        'https://github.com/ReyuFellOff',
   avatar:           'https://i.ibb.co/vxFXVzhk/square-crop.jpg', // leave '' for the default fallback
 

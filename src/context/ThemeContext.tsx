@@ -14,6 +14,14 @@ function applyThemeVars(theme: Theme) {
   for (const [key, value] of Object.entries(theme.vars)) {
     root.style.setProperty(`--${key}`, value);
   }
+  // Decorative SVGs consume these semantic tokens, so their colours follow
+  // every preset without duplicating artwork palettes in each component.
+  root.style.setProperty('--decor-1', 'var(--primary)');
+  root.style.setProperty('--decor-2', 'var(--accent)');
+  root.style.setProperty('--decor-3', 'var(--primary-glow)');
+  root.style.setProperty('--decor-4', 'var(--secondary)');
+  root.style.setProperty('--decor-light', 'var(--foreground)');
+  root.style.setProperty('--decor-dark', 'var(--background)');
 }
 
 interface ThemeCtx {

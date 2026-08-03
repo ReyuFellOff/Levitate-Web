@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Github, ExternalLink } from 'lucide-react';
 import { site, developerConfig } from '@/config/site';
+import DiscordMark from './DiscordMark';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -44,7 +45,7 @@ export default function Footer() {
                   aria-label="Discord"
                   className="liquid-glass h-10 w-10 rounded-full grid place-items-center hover:scale-110 transition-transform"
                 >
-                  <img src="https://i.ibb.co/TMnJyFdM/image.png" alt="Discord" className="h-4 w-4" />
+                  <DiscordMark className="h-4 w-4 text-primary" />
                 </a>
               </div>
             </div>

@@ -21,14 +21,14 @@ function StarburstDecor({ size }: { size: number }) {
     <svg width={size} height={size} viewBox="0 0 48 48" fill="none">
       <defs>
         <radialGradient id={`${id}r`} cx="50%" cy="50%" r="50%">
-          <stop offset="0%"   stopColor="#e9d5ff" />
-          <stop offset="55%"  stopColor="#a78bfa" />
-          <stop offset="100%" stopColor="#6d28d9" stopOpacity="0.6" />
+          <stop offset="0%"   stopColor="hsl(var(--decor-light))" />
+          <stop offset="55%"  stopColor="hsl(var(--decor-1))" />
+          <stop offset="100%" stopColor="hsl(var(--decor-4))" stopOpacity="0.6" />
         </radialGradient>
       </defs>
       <path d="M24 1 L27.2 20.8 L47 24 L27.2 27.2 L24 47 L20.8 27.2 L1 24 L20.8 20.8 Z"
         fill={`url(#${id}r)`} />
-      <circle cx="24" cy="24" r="4.5" fill="white" opacity="0.45" />
+      <circle cx="24" cy="24" r="4.5" fill="hsl(var(--decor-light))" opacity="0.45" />
     </svg>
   );
 }
@@ -40,19 +40,19 @@ function CrystalDecor({ size }: { size: number }) {
     <svg width={size} height={Math.round(size * 1.35)} viewBox="0 0 26 36" fill="none">
       <defs>
         <linearGradient id={`${id}b`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%"   stopColor="#ddd6fe" stopOpacity="0.65" />
-          <stop offset="50%"  stopColor="#7c3aed" stopOpacity="0.5"  />
-          <stop offset="100%" stopColor="#2e1065" stopOpacity="0.35" />
+          <stop offset="0%"   stopColor="hsl(var(--decor-light))" stopOpacity="0.65" />
+          <stop offset="50%"  stopColor="hsl(var(--decor-1))" stopOpacity="0.5"  />
+          <stop offset="100%" stopColor="hsl(var(--decor-dark))" stopOpacity="0.35" />
         </linearGradient>
         <linearGradient id={`${id}h`} x1="0" y1="0" x2="0.7" y2="1">
-          <stop offset="0%"   stopColor="white" stopOpacity="0.55" />
-          <stop offset="100%" stopColor="white" stopOpacity="0.0"  />
+          <stop offset="0%"   stopColor="hsl(var(--decor-light))" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="hsl(var(--decor-light))" stopOpacity="0.0"  />
         </linearGradient>
       </defs>
       {/* Slim body — points span 20 px wide in a 26-wide viewBox */}
       <polygon points="13,1 22,9 19,35 7,35 4,9" fill={`url(#${id}b)`} />
       {/* Right face subtle lighter */}
-      <polygon points="13,1 22,9 19,35 13,35" fill="white" opacity="0.07" />
+      <polygon points="13,1 22,9 19,35 13,35" fill="hsl(var(--decor-light))" opacity="0.07" />
       {/* Top catch-light facet */}
       <polygon points="13,1 22,9 13,13 4,9"   fill={`url(#${id}h)`} />
     </svg>
@@ -66,9 +66,9 @@ function RingDecor({ size }: { size: number }) {
     <svg width={size} height={size} viewBox="0 0 48 48" fill="none">
       <defs>
         <linearGradient id={`${id}l`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%"   stopColor="#f0abfc" />
-          <stop offset="50%"  stopColor="#818cf8" />
-          <stop offset="100%" stopColor="#38bdf8" stopOpacity="0.7" />
+          <stop offset="0%"   stopColor="hsl(var(--decor-1))" />
+          <stop offset="50%"  stopColor="hsl(var(--decor-2))" />
+          <stop offset="100%" stopColor="hsl(var(--decor-3))" stopOpacity="0.7" />
         </linearGradient>
       </defs>
       <circle cx="24" cy="24" r="21" stroke={`url(#${id}l)`} strokeWidth="1.5" />
@@ -76,7 +76,7 @@ function RingDecor({ size }: { size: number }) {
       <ellipse cx="24" cy="24" rx="21" ry="8"
         stroke={`url(#${id}l)`} strokeWidth="1" opacity="0.45"
         strokeDasharray="5 3" transform="rotate(-28 24 24)" />
-      <circle cx="24" cy="24" r="3" fill="#c084fc" opacity="0.9" />
+      <circle cx="24" cy="24" r="3" fill="hsl(var(--decor-1))" opacity="0.9" />
     </svg>
   );
 }
@@ -88,21 +88,21 @@ function PrismDecor({ size }: { size: number }) {
     <svg width={size} height={size} viewBox="0 0 56 52" fill="none">
       <defs>
         <linearGradient id={`${id}b`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%"   stopColor="#818cf8" stopOpacity="0.92" />
-          <stop offset="100%" stopColor="#c084fc" stopOpacity="0.72" />
+          <stop offset="0%"   stopColor="hsl(var(--decor-2))" stopOpacity="0.92" />
+          <stop offset="100%" stopColor="hsl(var(--decor-1))" stopOpacity="0.72" />
         </linearGradient>
         <linearGradient id={`${id}h`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"   stopColor="white" stopOpacity="0.22" />
-          <stop offset="100%" stopColor="white" stopOpacity="0.0"  />
+          <stop offset="0%"   stopColor="hsl(var(--decor-light))" stopOpacity="0.22" />
+          <stop offset="100%" stopColor="hsl(var(--decor-light))" stopOpacity="0.0"  />
         </linearGradient>
       </defs>
       <polygon points="28,4 50,46 6,46" fill={`url(#${id}b)`} />
-      <polygon points="28,4 6,46 28,46"  fill="#1e1b4b" opacity="0.22" />
+      <polygon points="28,4 6,46 28,46"  fill="hsl(var(--decor-dark))" opacity="0.22" />
       <polygon points="28,4 50,46 28,46" fill={`url(#${id}h)`} />
       {/* Refraction rays */}
-      <line x1="50" y1="46" x2="57" y2="32" stroke="#f472b6" strokeWidth="1.8" strokeLinecap="round" opacity="0.75" />
-      <line x1="50" y1="46" x2="59" y2="43" stroke="#60a5fa" strokeWidth="1.4" strokeLinecap="round" opacity="0.65" />
-      <line x1="50" y1="46" x2="55" y2="52" stroke="#4ade80" strokeWidth="1.1" strokeLinecap="round" opacity="0.55" />
+       <line x1="50" y1="46" x2="57" y2="32" stroke="hsl(var(--decor-1))" strokeWidth="1.8" strokeLinecap="round" opacity="0.75" />
+       <line x1="50" y1="46" x2="59" y2="43" stroke="hsl(var(--decor-3))" strokeWidth="1.4" strokeLinecap="round" opacity="0.65" />
+       <line x1="50" y1="46" x2="55" y2="52" stroke="hsl(var(--decor-2))" strokeWidth="1.1" strokeLinecap="round" opacity="0.55" />
     </svg>
   );
 }
@@ -114,8 +114,8 @@ function RuneDecor({ size }: { size: number }) {
     <svg width={size} height={size} viewBox="0 0 48 48" fill="none">
       <defs>
         <linearGradient id={`${id}l`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%"   stopColor="#a5b4fc" />
-          <stop offset="100%" stopColor="#e879f9" stopOpacity="0.85" />
+          <stop offset="0%"   stopColor="hsl(var(--decor-3))" />
+          <stop offset="100%" stopColor="hsl(var(--decor-1))" stopOpacity="0.85" />
         </linearGradient>
       </defs>
       {/* Outer hexagon */}
@@ -130,9 +130,9 @@ function RuneDecor({ size }: { size: number }) {
       {/* Center */}
       <circle cx="24" cy="24" r="3.5" fill={`url(#${id}l)`} opacity="0.9" />
       {/* Corner accent dots */}
-      <circle cx="24" cy="3"  r="1.5" fill="#a5b4fc" opacity="0.7" />
-      <circle cx="41" cy="35" r="1.5" fill="#e879f9" opacity="0.7" />
-      <circle cx="7"  cy="35" r="1.5" fill="#818cf8" opacity="0.7" />
+       <circle cx="24" cy="3"  r="1.5" fill="hsl(var(--decor-3))" opacity="0.7" />
+       <circle cx="41" cy="35" r="1.5" fill="hsl(var(--decor-1))" opacity="0.7" />
+       <circle cx="7"  cy="35" r="1.5" fill="hsl(var(--decor-2))" opacity="0.7" />
     </svg>
   );
 }

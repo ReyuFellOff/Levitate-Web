@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github } from 'lucide-react';
+import { ArrowUpRight, Code2, ExternalLink, Github, UserPlus } from 'lucide-react';
 import { developerConfig } from '@/config/developer';
+import DiscordMark from '@/components/DiscordMark';
 
 /* ─── Language badge icons ────────────────────────────────────────────────── */
 function JavaScriptIcon({ className }: { className?: string }) {
@@ -168,48 +169,106 @@ export default function About() {
           </p>
         </motion.div>
 
-        {/* Social links */}
+        {/* Creator links + stack */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.45 }}
-          className="mt-7 flex items-center justify-center gap-3 max-w-sm mx-auto"
+          className="mt-9 grid gap-4 sm:grid-cols-[1.08fr_0.92fr] max-w-xl mx-auto text-left"
         >
-          <span className="flex-1 inline-flex items-center justify-center gap-2 liquid-glass px-5 py-2.5 rounded-full text-sm font-medium">
-            <img src="https://i.ibb.co/TMnJyFdM/image.png" alt="Discord" className="h-4 w-4 flex-shrink-0" />
-            @{developerConfig.discordUsername}
-          </span>
-          <a
-            href={developerConfig.githubUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="flex-1 inline-flex items-center justify-center gap-2 liquid-glass px-5 py-2.5 rounded-full text-sm font-medium hover:scale-105 transition-transform"
-          >
-            <Github className="h-4 w-4 flex-shrink-0" />
-            GitHub
-          </a>
-        </motion.div>
-
-        {/* Languages */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="mt-3 flex items-center justify-center gap-3 max-w-md mx-auto"
-        >
-          {developerConfig.languages.map((lang) => (
-            <div
-              key={lang.id}
-              className="flex-1 liquid-glass rounded-2xl px-4 py-3 flex items-center justify-center gap-2.5"
-            >
-              {lang.id === 'javascript' ? (
-                <JavaScriptIcon className="h-6 w-6 rounded flex-shrink-0" />
-              ) : (
-                <TypeScriptIcon className="h-6 w-6 rounded flex-shrink-0" />
-              )}
-              <span className="text-sm font-medium">{lang.label}</span>
+          <div className="liquid-glass rounded-2xl p-3.5">
+            <div className="px-2 pb-2.5 flex items-center justify-between">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.22em] text-primary font-semibold">Connect</p>
+                <p className="mt-1 text-xs text-muted-foreground">Find the person behind the bot</p>
+              </div>
+              <div className="h-8 w-8 rounded-xl bg-primary/10 grid place-items-center text-primary">
+                <ExternalLink className="h-4 w-4" />
+              </div>
             </div>
-          ))}
+
+            <div className="space-y-2">
+              <div className="flex items-center gap-3 rounded-xl border border-border/70 bg-background/20 px-3 py-3">
+                <div className="h-9 w-9 rounded-xl bg-primary/15 grid place-items-center text-primary">
+                  <DiscordMark className="h-[18px] w-[18px]" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-semibold truncate">Discord</p>
+                  <p className="text-xs text-muted-foreground truncate">@{developerConfig.discordUsername}</p>
+                </div>
+                <span className="flex items-center gap-1.5 text-[10px] font-medium text-emerald-500">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_10px_hsl(142_70%_55%_/_0.8)]" />
+                  Online
+                </span>
+              </div>
+
+              <a
+                href={developerConfig.discordAddFriendUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="group flex items-center justify-between gap-3 rounded-xl bg-primary/[0.09] border border-primary/20 px-3.5 py-2.5 text-primary hover:bg-primary/[0.15] hover:border-primary/35 transition-colors"
+              >
+                <span className="flex items-center gap-2.5">
+                  <span className="h-7 w-7 rounded-lg bg-primary/15 grid place-items-center">
+                    <UserPlus className="h-3.5 w-3.5" />
+                  </span>
+                  <span>
+                    <span className="block text-xs font-semibold">Add me on Discord</span>
+                    <span className="block text-[10px] text-muted-foreground">Open my profile to send a request</span>
+                  </span>
+                </span>
+                <ArrowUpRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+
+              <a
+                href={developerConfig.githubUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="group flex items-center gap-3 rounded-xl border border-border/70 px-3 py-2.5 hover:border-primary/40 hover:bg-primary/[0.06] transition-colors"
+              >
+                <div className="h-9 w-9 rounded-xl bg-foreground/[0.08] grid place-items-center">
+                  <Github className="h-[18px] w-[18px]" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold">GitHub</p>
+                  <p className="text-xs text-muted-foreground">Projects & source code</p>
+                </div>
+                <ExternalLink className="ml-auto h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-colors" />
+              </a>
+            </div>
+          </div>
+
+          <div className="liquid-glass rounded-2xl p-3.5 relative overflow-hidden">
+            <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-primary/10 blur-2xl pointer-events-none" />
+            <div className="relative px-2 pb-2.5 flex items-start justify-between">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.22em] text-primary font-semibold">Built with</p>
+                <p className="mt-1 text-xs text-muted-foreground">The tools behind Levitate</p>
+              </div>
+              <Code2 className="h-5 w-5 text-primary/70" />
+            </div>
+
+            <div className="relative grid grid-cols-2 gap-2">
+              {developerConfig.languages.map((lang) => (
+                <div
+                  key={lang.id}
+                  className="rounded-xl border border-border/70 bg-background/20 px-2.5 py-3"
+                >
+                  <div className="flex items-center gap-2">
+                    {lang.id === 'javascript' ? (
+                      <JavaScriptIcon className="h-6 w-6 rounded flex-shrink-0" />
+                    ) : (
+                      <TypeScriptIcon className="h-6 w-6 rounded flex-shrink-0" />
+                    )}
+                    <span className="text-xs font-semibold">{lang.label}</span>
+                  </div>
+                  <p className="mt-2 text-[10px] leading-tight text-muted-foreground">
+                    {lang.id === 'javascript' ? 'Runtime & tooling' : 'Typed interfaces'}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
         </motion.div>
       </motion.div>
     </section>

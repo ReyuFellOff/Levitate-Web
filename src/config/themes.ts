@@ -358,6 +358,110 @@ export const themes: Theme[] = [
       'shadow-card':    '0 4px 24px hsl(148 35% 60% / 0.11), inset 0 1px 0 hsl(140 75% 99% / 0.70)',
     },
   },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // 7. Ember Night  ·  charcoal / copper / ember
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'ember-night',
+    name: 'Ember Night',
+    mode: 'dark',
+    previewGradient: 'linear-gradient(135deg, #21151a 0%, #b95745 52%, #f2b36d 100%)',
+    vars: {
+      'background':           '12 28% 12%',
+      'foreground':           '28 38% 97%',
+      'card':                 '15 25% 18%',
+      'card-foreground':      '28 38% 97%',
+      'popover':              '15 25% 18%',
+      'popover-foreground':   '28 38% 97%',
+      'primary':              '18 82% 68%',
+      'primary-foreground':   '12 28% 10%',
+      'primary-glow':         '34 88% 68%',
+      'secondary':            '15 22% 27%',
+      'secondary-foreground': '28 38% 97%',
+      'muted':                '15 20% 22%',
+      'muted-foreground':     '25 22% 73%',
+      'accent':               '2 65% 63%',
+      'accent-foreground':    '12 28% 10%',
+      'destructive':          '0 70% 66%',
+      'destructive-foreground':'28 38% 97%',
+      'border':               '18 25% 35%',
+      'input':                '15 25% 26%',
+      'ring':                 '18 82% 68%',
+      'glass-bg':             '16 24% 24%',
+      'glass-border':         '24 62% 64%',
+      'glass-shine':          '32 80% 97%',
+      'sticker-hue-shift':    '335deg',
+      'aurora-blob-1':        '18 82% 68%',
+      'aurora-blob-2':        '2 65% 63%',
+      'aurora-blob-3':        '34 88% 68%',
+      'aurora-blob-4':        '350 62% 62%',
+      'aurora-blob-5':        '25 80% 58%',
+      'gradient-aurora':      'linear-gradient(135deg, hsl(18 82% 68%), hsl(2 65% 63%) 50%, hsl(34 88% 68%))',
+      'gradient-mesh':
+        'radial-gradient(at 15% 25%, hsl(18 82% 68% / 0.28) 0px, transparent 52%),' +
+        'radial-gradient(at 85% 10%, hsl(2 65% 63% / 0.22) 0px, transparent 52%),' +
+        'radial-gradient(at 70% 85%, hsl(34 88% 68% / 0.20) 0px, transparent 52%),' +
+        'radial-gradient(at 10% 90%, hsl(350 62% 62% / 0.16) 0px, transparent 50%)',
+      'gradient-text':        'linear-gradient(135deg, hsl(28 70% 96%), hsl(18 88% 76%), hsl(34 88% 72%))',
+      'shadow-glow':    '0 20px 60px -18px hsl(18 82% 68% / 0.55)',
+      'shadow-glass':   '0 8px 32px hsl(12 35% 5% / 0.50), inset 0 1px 0 hsl(32 80% 97% / 0.10)',
+      'shadow-elegant': '0 30px 80px -28px hsl(18 82% 68% / 0.42)',
+      'shadow-card':    '0 4px 24px hsl(12 35% 5% / 0.38), inset 0 1px 0 hsl(32 80% 97% / 0.07)',
+    },
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // 8. Pearl Tide  ·  cool pearl / indigo / seafoam
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: 'pearl-tide',
+    name: 'Pearl Tide',
+    mode: 'light',
+    previewGradient: 'linear-gradient(135deg, #eef8f8 0%, #4b92a5 52%, #8c7fe8 100%)',
+    vars: {
+      'background':           '190 38% 97%',
+      'foreground':           '215 42% 13%',
+      'card':                 '190 28% 93%',
+      'card-foreground':      '215 42% 13%',
+      'popover':              '190 28% 93%',
+      'popover-foreground':   '215 42% 13%',
+      'primary':              '190 60% 42%',
+      'primary-foreground':   '0 0% 100%',
+      'primary-glow':         '248 65% 62%',
+      'secondary':            '190 22% 87%',
+      'secondary-foreground': '215 42% 16%',
+      'muted':                '190 16% 91%',
+      'muted-foreground':     '210 22% 45%',
+      'accent':               '248 65% 62%',
+      'accent-foreground':    '0 0% 100%',
+      'destructive':          '0 72% 52%',
+      'destructive-foreground':'0 0% 100%',
+      'border':               '190 20% 84%',
+      'input':                '190 20% 92%',
+      'ring':                 '190 60% 42%',
+      'glass-bg':             '190 48% 99%',
+      'glass-border':         '190 38% 66%',
+      'glass-shine':          '190 80% 99%',
+      'sticker-hue-shift':    '175deg',
+      'aurora-blob-1':        '190 60% 42%',
+      'aurora-blob-2':        '248 65% 62%',
+      'aurora-blob-3':        '178 58% 52%',
+      'aurora-blob-4':        '220 58% 63%',
+      'aurora-blob-5':        '202 64% 52%',
+      'gradient-aurora':      'linear-gradient(135deg, hsl(190 60% 42%), hsl(248 65% 62%) 50%, hsl(178 58% 52%))',
+      'gradient-mesh':
+        'radial-gradient(at 15% 25%, hsl(190 60% 42% / 0.09) 0px, transparent 52%),' +
+        'radial-gradient(at 85% 10%, hsl(248 65% 62% / 0.08) 0px, transparent 52%),' +
+        'radial-gradient(at 70% 85%, hsl(178 58% 52% / 0.06) 0px, transparent 52%),' +
+        'radial-gradient(at 10% 90%, hsl(220 58% 63% / 0.05) 0px, transparent 50%)',
+      'gradient-text':        'linear-gradient(135deg, hsl(190 68% 32%), hsl(248 68% 52%), hsl(190 62% 38%))',
+      'shadow-glow':    '0 20px 60px -18px hsl(190 60% 42% / 0.32)',
+      'shadow-glass':   '0 8px 32px hsl(205 35% 55% / 0.14), inset 0 1px 0 hsl(190 80% 99% / 0.90)',
+      'shadow-elegant': '0 30px 80px -28px hsl(190 60% 42% / 0.22)',
+      'shadow-card':    '0 4px 24px hsl(205 35% 55% / 0.11), inset 0 1px 0 hsl(190 80% 99% / 0.70)',
+    },
+  },
 ];
 
 export const DEFAULT_THEME_ID = 'indigo';
