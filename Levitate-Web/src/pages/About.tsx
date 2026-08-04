@@ -115,7 +115,7 @@ export default function About() {
         className="text-center mb-16"
       >
         <span className="text-xs font-semibold uppercase tracking-widest text-primary">About</span>
-        <h1 className="mt-3 font-display font-extrabold text-5xl md:text-6xl tracking-tight">
+        <h1 className="mt-3 font-display font-extrabold text-[2.1rem] sm:text-5xl md:text-6xl tracking-tight">
           One developer.{' '}
           <span
             style={{
@@ -135,7 +135,7 @@ export default function About() {
         initial={{ opacity: 0, y: 40, scale: 0.97 }}
         animate={{ opacity: 1, y: 0,  scale: 1 }}
         transition={{ duration: 0.7, delay: 0.15, ease: [0.34, 1.56, 0.64, 1] }}
-        className="liquid-glass rounded-3xl p-10 text-center relative overflow-hidden"
+        className="liquid-glass rounded-3xl p-6 sm:p-10 text-center relative overflow-hidden"
       >
         {/* Ambient glow behind card */}
         <div

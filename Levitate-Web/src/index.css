@@ -246,6 +246,9 @@
   .cmd-usage {
     background:  hsl(var(--muted) / 0.7);
     border:      1px solid hsl(var(--border) / 0.6);
+    overflow-x:  auto;
+    max-width:   100%;
+    word-break:  break-word;
     @apply rounded-lg px-3 py-2 text-xs font-mono text-muted-foreground whitespace-pre-wrap leading-relaxed;
   }
 

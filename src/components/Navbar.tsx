@@ -5,12 +5,15 @@ import { Menu, X, ExternalLink } from 'lucide-react';
 import { site } from '@/config/site';
 import NavSearch, { type NavSearchHandle } from './NavSearch';
 import ThemeSwitcher from './ThemeSwitcher';
+import { themes } from '@/config/themes';
+import { useTheme } from '@/context/ThemeContext';
 
 export default function Navbar() {
   const [open, setOpen]         = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const searchRef               = useRef<NavSearchHandle>(null);
   const { pathname }            = useLocation();
+  const { theme: activeTheme, setTheme } = useTheme();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
@@ -147,6 +150,38 @@ export default function Navbar() {
                   {item.label}
                 </NavLink>
               ))}
+              {/* ── Theme picker ── */}
+              <div className="mt-1 px-1 py-2 border-t border-border/30">
+                <p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground px-1 mb-2">
+                  Theme
+                </p>
+                <div className="flex flex-wrap gap-2 px-1">
+                  {themes.map((t) => (
+                    <button
+                      key={t.id}
+                      onClick={() => setTheme(t.id)}
+                      aria-label={t.name}
+                      title={t.name}
+                      className="relative h-7 w-7 rounded-full flex-shrink-0 transition-transform duration-150 active:scale-90"
+                      style={{
+                        background: t.previewGradient,
+                        boxShadow:
+                          activeTheme.id === t.id
+                            ? '0 0 0 2.5px hsl(var(--foreground) / 0.85)'
+                            : '0 0 0 1.5px hsl(var(--border) / 0.4)',
+                      }}
+                    >
+                      {activeTheme.id === t.id && (
+                        <span className="absolute inset-0 rounded-full flex items-center justify-center">
+                          <span className="h-2 w-2 rounded-full bg-white/80" />
+                        </span>
+                      )}
+                    </button>
+                  ))}
+                </div>
+                <p className="text-[10px] text-muted-foreground px-1 mt-1.5">{activeTheme.name}</p>
+              </div>
+
               <a
                 href={site.bot.inviteUrl}
                 target="_blank"

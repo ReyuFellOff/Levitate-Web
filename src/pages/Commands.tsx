@@ -85,7 +85,7 @@ export default function Commands() {
         className="text-center max-w-2xl mx-auto"
       >
         <span className="text-xs font-semibold uppercase tracking-widest text-primary">Reference</span>
-        <h1 className="mt-3 font-display font-bold text-5xl md:text-6xl tracking-tight">
+        <h1 className="mt-3 font-display font-bold text-4xl sm:text-5xl md:text-6xl tracking-tight">
           <span
             style={{
               background:           'var(--gradient-text)',
@@ -293,7 +293,7 @@ export default function Commands() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="mt-16 liquid-glass rounded-2xl px-6 py-5 flex flex-wrap gap-6 text-sm text-muted-foreground"
+        className="mt-16 liquid-glass rounded-2xl px-5 py-5 flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-6 text-sm text-muted-foreground"
       >
         <span className="font-display font-semibold text-foreground">Legend</span>
         <span><code className="font-mono text-primary">&lt;required&gt;</code>: must be provided</span>

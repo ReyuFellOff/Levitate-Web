@@ -107,6 +107,9 @@ export default function Footer() {
                 Prefix: <code className="font-mono text-primary">$</code>
                 &nbsp;·&nbsp;{site.bot.uptime} uptime
               </p>
+              <p className="text-xs text-muted-foreground">
+                Last updated: {site.lastUpdated}
+              </p>
             </div>
           </div>
         </div>

@@ -13,6 +13,8 @@ export const site = {
   // `bot.commandCount` is overwritten below with the real, auto-counted
   // total from `commandCategories` so it can never drift out of sync.
   bot: botConfig,
+  // Update this whenever any website source or public-facing website content changes.
+  lastUpdated: "Tuesday, August 4, '26 at 8:26 PM IST (UTC+05:30)",
 
   nav: [
     { label: 'Home',     href: '/' },
@@ -151,8 +153,9 @@ export const site = {
         { name: '$vanityrole',       aliases: ['vr', 'vanityroles'],                 permission: 'Manage Server',  description: 'Auto-assign roles based on a status/bio keyword or the server tag.', usage: '$vanityrole\n$vanityrole status\n$vanityrole bio\n$vanityrole tag' },
         { name: '$alias',            aliases: [],                                    permission: null,             description: 'Create a personal private shortcut for any command.',             usage: '$alias create <name> <command>\n$alias list\n$alias delete <name>' },
         { name: '$list',             aliases: ['ls'],                                permission: null,             description: 'Paginated list of roles, members, bots, emojis, stickers, channels, or bans.', usage: '$list roles|members|bots|emojis|channels|bans' },
+        { name: '$roleinfo',         aliases: ['ri'],                                permission: null,             description: 'Show detailed information about a role using a mention, ID, or text from its name.', usage: '$roleinfo <@role | role ID | role name>' },
         { name: '$whoping',          aliases: ['wp', 'whoponged'],                   permission: null,             description: 'Show the last 10 messages that directly pinged a user in this channel.', usage: '$whoping [@user]' },
-        { name: '$ghostping',        aliases: ['gp', 'ghostpng'],                    permission: 'Administrator',  description: 'Ghost-ping up to 10 users, then instantly deletes the message.', usage: '$ghostping <@user1> [@user2] …' },
+        { name: '$ghostping',        aliases: ['gp', 'ghostpng'],                    permission: 'Administrator',  description: 'Ghost-ping users or a role, then instantly delete the message. Role targets are available to the server owner.', usage: '$ghostping <@user1> [@user2] … | <role>' },
         { name: '$vanity',           aliases: [],                                    permission: null,             description: 'Look up a Discord vanity URL and check if it\'s taken or available.', usage: '$vanity <url>' },
         { name: '$enlarge',          aliases: ['jumbo', 'big'],                      permission: null,             description: 'Show a custom emoji as a full-size image. Accepts emoji markdown, a raw ID, or an emoji name.', usage: '$enlarge <emoji | emoji ID | :name:>' },
         { name: '$react',            aliases: ['re'],                                permission: null,             description: 'React to a message with an emoji; targets the reply or the previous message.', usage: '$react <emoji name or ID>' },
@@ -205,6 +208,7 @@ export const site = {
         { name: '$remove',       aliases: ['rm'], permission: null, description: 'Remove a track from the queue by position.', usage: '$remove <position>' },
         { name: '$resume',       aliases: ['unpause', 'res'], permission: null, description: 'Resume a paused track.', usage: '$resume' },
         { name: '$seek',         aliases: [], permission: null, description: 'Seek within the current track.', usage: '$seek <time>' },
+        { name: '$filter',       aliases: ['filters'], permission: null, description: 'Apply, remove, or reset multiple music filters at once. Use help or available to see every supported filter.', usage: '$filter <filter ...>\n$filter remove <filter ...>\n$filter reset\n$filter clear\n$filter help\n$filter available' },
         { name: '$servervolume', aliases: ['svol', 'sv'], permission: 'Manage Server', description: 'Set or view the persistent server playback volume.', usage: '$servervolume [1-100]' },
         { name: '$shuffle',      aliases: ['sh'], permission: null, description: 'Shuffle the upcoming tracks in the queue.', usage: '$shuffle' },
         { name: '$skip',         aliases: ['s', 'next'], permission: null, description: 'Skip the currently playing track.', usage: '$skip' },

@@ -343,7 +343,7 @@ function Hero() {
           </motion.div>
 
           {/* Headline */}
-          <h1 className="mt-6 font-display font-extrabold text-5xl md:text-6xl lg:text-[5rem] leading-[1.02] tracking-tight">
+          <h1 className="mt-6 font-display font-extrabold text-[2.1rem] sm:text-5xl md:text-6xl lg:text-[5rem] leading-[1.1] sm:leading-[1.02] tracking-tight">
             Meet{' '}
             <GradientReveal text="Levitate" delay={0.25} />
           </h1>
@@ -371,13 +371,13 @@ function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1,  y: 0 }}
             transition={{ delay: 1.35, ease: [0.34, 1.56, 0.64, 1] }}
-            className="mt-8 flex flex-wrap gap-3"
+            className="mt-8 flex flex-col sm:flex-row gap-3"
           >
             <a
               href={site.bot.inviteUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 bg-aurora text-white font-bold px-7 py-3.5 rounded-full shadow-[var(--shadow-glow)] hover:opacity-90 hover:scale-[1.04] transition-all [transition-duration:300ms]"
+              className="inline-flex items-center justify-center gap-2 bg-aurora text-white font-bold px-7 py-3.5 rounded-full shadow-[var(--shadow-glow)] hover:opacity-90 hover:scale-[1.04] transition-all [transition-duration:300ms]"
               style={{ animation: 'aurora 3s linear infinite' }}
             >
               Add to Discord <ExternalLink className="h-4 w-4" />
@@ -386,7 +386,7 @@ function Hero() {
               href={site.bot.supportUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 liquid-glass font-semibold px-7 py-3.5 rounded-full hover:scale-[1.03] transition-all duration-300 text-sm"
+              className="inline-flex items-center justify-center gap-2 liquid-glass font-semibold px-7 py-3.5 rounded-full hover:scale-[1.03] transition-all duration-300 text-sm"
             >
               Support Server
             </a>
@@ -437,7 +437,7 @@ function Hero() {
             ref={stageRef}
             onMouseMove={onMove}
             onMouseLeave={onLeave}
-            className="relative w-full max-w-sm aspect-square"
+            className="relative w-full max-w-xs sm:max-w-sm aspect-square mx-auto"
             style={{ perspective: 1000 }}
           >
             {/* Glow */}
@@ -503,17 +503,19 @@ function Hero() {
               </div>
             </motion.div>
 
-            {/* Decorative shapes — each depth multiplier places them on a distinct Z-plane */}
-            <FloatingDecor className="absolute -top-6 left-6 z-20"        size={36} duration={4.5} delay={0}   rotate={10} parallaxX={starX}  parallaxY={starY}>
+            {/* Decorative shapes — negative-x offsets become flush (right-0/left-0) on
+                mobile to stay within the stage bounds; restored (sm:-right-8/sm:-left-10)
+                on ≥640 px where the two-column layout gives them breathing room. */}
+            <FloatingDecor className="absolute -top-6 left-6 z-20"                             size={36} duration={4.5} delay={0}   rotate={10} parallaxX={starX}  parallaxY={starY}>
               <StarburstDecor size={36} />
             </FloatingDecor>
-            <FloatingDecor className="absolute top-1/3 -right-8 z-20"     size={34} duration={5.5} delay={0.6} rotate={8}  parallaxX={moonX}  parallaxY={moonY}>
+            <FloatingDecor className="absolute top-1/3 right-0 sm:-right-8 z-20"              size={34} duration={5.5} delay={0.6} rotate={8}  parallaxX={moonX}  parallaxY={moonY}>
               <RingDecor size={34} />
             </FloatingDecor>
-            <FloatingDecor className="absolute -bottom-4 right-1/4 z-20"  size={42} duration={6}   delay={1.1} rotate={6}  parallaxX={cloudX} parallaxY={cloudY}>
+            <FloatingDecor className="absolute -bottom-4 right-1/4 z-20"                       size={42} duration={6}   delay={1.1} rotate={6}  parallaxX={cloudX} parallaxY={cloudY}>
               <PrismDecor size={42} />
             </FloatingDecor>
-            <FloatingDecor className="absolute bottom-1/4 -left-10 z-20"  size={30} duration={5}   delay={1.6} rotate={12} parallaxX={orbX}   parallaxY={orbY}>
+            <FloatingDecor className="absolute bottom-1/4 left-0 sm:-left-10 z-20"            size={30} duration={5}   delay={1.6} rotate={12} parallaxX={orbX}   parallaxY={orbY}>
               <CrystalDecor size={30} />
             </FloatingDecor>
           </div>
@@ -529,7 +531,7 @@ function Hero() {
 function Features() {
   return (
     <section className="container max-w-5xl py-20 relative">
-      <FloatingDecor className="absolute -top-4 right-4 md:right-16 hidden sm:block" size={44} duration={5.5} rotate={7}>
+      <FloatingDecor className="absolute -top-4 right-4 md:right-16" size={36} duration={5.5} rotate={7}>
         <RuneDecor size={44} />
       </FloatingDecor>
 
@@ -706,11 +708,11 @@ function Cta() {
         className="relative overflow-hidden rounded-3xl px-8 md:px-16 py-16 text-center"
         style={{ background: 'var(--gradient-aurora)', backgroundSize: '300% 300%', animation: 'aurora 24s linear infinite' }}
       >
-        <FloatingDecor className="absolute top-4 right-8 hidden sm:block" size={34} duration={5} rotate={10}>
-          <CrystalDecor size={34} />
+        <FloatingDecor className="absolute top-4 right-4 sm:right-8" size={28} duration={5} rotate={10}>
+          <CrystalDecor size={28} />
         </FloatingDecor>
-        <FloatingDecor className="absolute bottom-6 left-8 hidden sm:block" size={32} duration={4.5} delay={0.4} rotate={12}>
-          <StarburstDecor size={32} />
+        <FloatingDecor className="absolute bottom-4 left-4 sm:left-8 sm:bottom-6" size={26} duration={4.5} delay={0.4} rotate={12}>
+          <StarburstDecor size={26} />
         </FloatingDecor>
         {/* Floating orbs inside CTA */}
         <motion.div
@@ -748,13 +750,13 @@ function Cta() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.25, ease: [0.34, 1.56, 0.64, 1] }}
-          className="relative mt-9 flex flex-wrap items-center justify-center gap-3"
+          className="relative mt-9 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3"
         >
           <a
             href={site.bot.inviteUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 bg-white text-[hsl(232,60%,28%)] font-bold px-9 py-4 rounded-full shadow-lg hover:opacity-93 hover:scale-[1.04] transition-all duration-300 text-sm"
+            className="inline-flex items-center justify-center gap-2 bg-white text-[hsl(232,60%,28%)] font-bold px-9 py-4 rounded-full shadow-lg hover:opacity-93 hover:scale-[1.04] transition-all duration-300 text-sm"
           >
             Add to Discord <ExternalLink className="h-4 w-4" />
           </a>
@@ -762,7 +764,7 @@ function Cta() {
             href={site.bot.supportUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 border-2 border-white/40 text-white font-semibold px-9 py-4 rounded-full hover:bg-white/12 hover:scale-[1.04] transition-all duration-300 text-sm"
+            className="inline-flex items-center justify-center gap-2 border-2 border-white/40 text-white font-semibold px-9 py-4 rounded-full hover:bg-white/12 hover:scale-[1.04] transition-all duration-300 text-sm"
           >
             Support Server
           </a>
