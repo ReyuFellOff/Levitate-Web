@@ -14,7 +14,7 @@ export const site = {
   // total from `commandCategories` so it can never drift out of sync.
   bot: botConfig,
   // Update this whenever any website source or public-facing website content changes.
-  lastUpdated: "Wednesday, August 5, '26 at 9:05 PM IST (UTC+05:30)",
+  lastUpdated: "Wednesday, August 5, '26 at 10:59 PM IST (UTC+05:30)",
 
   nav: [
     { label: 'Home',     href: '/' },
